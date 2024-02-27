@@ -1,5 +1,5 @@
 package com.wecp.medicalequipmentandtrackingsystem.service;
-// import com.wecp.medicalequipmentandtrackingsystem.config.UserInfoUserDetails;
+import com.wecp.medicalequipmentandtrackingsystem.config.UserInfoUserDetails;
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.User;
 import com.wecp.medicalequipmentandtrackingsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,18 +34,14 @@ public class UserService implements UserDetailsService{
         return repository.findByName(username).get();
     }
 
+    
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
-    }
-    
-    // @Override
-    // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    //     Optional<User> userInfo = repository.findByName(username);
-    //     return userInfo.map(UserInfoUserDetails::new)
-    //             .orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
+        Optional<User> userInfo = repository.findByName(username);
+        return userInfo.map(UserInfoUserDetails::new)
+                .orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
 
-    // }
+    }
 
 }
