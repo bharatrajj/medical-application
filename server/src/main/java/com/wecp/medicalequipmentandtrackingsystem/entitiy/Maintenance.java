@@ -2,17 +2,10 @@ package com.wecp.medicalequipmentandtrackingsystem.entitiy;
 
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "maintenances")
 public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +15,12 @@ public class Maintenance {
     private Date completedDate;
     private String description;
 
-    private String status;
+    private String status; // status field to track the status of the maintenance task
+    // Add other maintenance-related fields as needed
+
     @ManyToOne
-    private Equipment equipment;
+    @JoinColumn(name = "equipmentId")
+    private Equipment equipment; // Many maintenance tasks can be associated with one equipment
 
     public Long getId() {
         return id;

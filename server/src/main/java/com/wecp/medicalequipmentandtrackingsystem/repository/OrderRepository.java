@@ -1,14 +1,13 @@
 package com.wecp.medicalequipmentandtrackingsystem.repository;
- 
+
+
+import com.wecp.medicalequipmentandtrackingsystem.entitiy.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
- 
-import com.wecp.medicalequipmentandtrackingsystem.entitiy.OrderData;
- 
+
+import java.util.List;
+
 @Repository
-public interface OrderRepository extends JpaRepository<OrderData,Long>{
-<<<<<<< HEAD
-=======
-   
->>>>>>> b74735ccde08dc99b120b0f88aece803d43cb350
+public interface OrderRepository extends JpaRepository<Orders, Long> {
+    List<Orders> findByEquipmentId(Long equipmentId);
 }
