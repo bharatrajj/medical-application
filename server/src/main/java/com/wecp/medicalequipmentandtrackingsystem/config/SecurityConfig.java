@@ -1,63 +1,73 @@
 package com.wecp.medicalequipmentandtrackingsystem.config;
 
-import com.wecp.medicalequipmentandtrackingsystem.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.SecurityFilterChain;
 
 
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService userDetailsService;
-    private final JwtRequestFilter jwtRequestFilter;
-    private final PasswordEncoder passwordEncoder;
+import com.wecp.medicalequipmentandtrackingsystem.jwt.JwtRequestFilter;
 
+import com.wecp.medicalequipmentandtrackingsystem.service.UserService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // TODO: implement the security configuration
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
 
-        // configure CORS and CSRF
-        // configure the routes that are accessible without authentication
-        // configure the routes that are accessible with specific roles
-              // set the permission w.r.t to authorities
-          // - /api/user/register: accessible to everyone
-          // - /api/user/login: accessible to everyone
-          // - /api/hospital/create: accessible to HOSPITAL authority
-          // - /api/hospitals: accessible to HOSPITAL authority
-          // - /api/hospital/equipment: accessible to HOSPITAL authority
-          // - /api/hospital/equipment/{hospitalId}: accessible to HOSPITAL authority
-          // - /api/hospital/maintenance/schedule: accessible to HOSPITAL authority
-          // - /api/hospital/order: accessible to HOSPITAL authority
-          // - /api/technician/maintenance: accessible to TECHNICIAN authority
-          // - /api/technician/maintenance/update/{maintenanceId}: accessible to TECHNICIAN authority
-          // - /api/supplier/orders: accessible to SUPPLIER authority
-          // - /api/supplier/order/update/{orderId}: accessible to SUPPLIER authority
-          // - any other route: accessible to authenticated users
-        // configure the session management
-        // add the jwtRequestFilter before the UsernamePasswordAuthenticationFilter
-
-    }
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    @Autowired
+    JwtRequestFilter authFilter;
+     PasswordEncoder encoder = new BCryptPasswordEncoder();
+    //authentication
+    @Bean
+    public UserDetailsService userDetailsService() {
+    //    UserDetails admin = User.withUsername("Basant")
+    //            .password(encoder.encode("Pwd1"))
+    //            .roles("ADMIN")
+    //            .build();
+    //    UserDetails user = User.withUsername("John")
+    //            .password(encoder.encode("Pwd2"))
+    //            .roles("USER","ADMIN","HR")
+    //            .build();
+    //    return new InMemoryUserDetailsManager(admin, user);
+        return new UserService();
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user/login").permitAll().anyRequest().authenticated();
+                return http.build();
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
 }
+
