@@ -2,10 +2,20 @@ package com.wecp.medicalequipmentandtrackingsystem.entitiy;
 
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
-
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Maintenance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date scheduledDate;
@@ -13,7 +23,7 @@ public class Maintenance {
     private String description;
 
     private String status;
-
+    @ManyToOne
     private Equipment equipment;
 
     public Long getId() {
