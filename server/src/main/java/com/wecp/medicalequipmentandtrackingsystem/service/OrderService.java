@@ -21,7 +21,7 @@ Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow(() -
 order.setEquipment(equipment);
 order.setOrderDate(new Date());
 order.setStatus("Initiated");
-// Save the order
+// Save the Order
 return orderRepository.save(order);
 }
 
