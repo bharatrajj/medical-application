@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
  
 import java.sql.SQLException;
 import java.util.List;
+<<<<<<< HEAD
  
  
 public class TechnicianController {
@@ -24,11 +25,25 @@ public class TechnicianController {
         }catch(SQLException e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+=======
+
+@RestController
+public class TechnicianController {
+
+    @Autowired
+    public MaintenanceService maintenanceService;
+
+    @GetMapping("/api/technician/maintenance")
+    public ResponseEntity<List<Maintenance>> getAllMaintenance() {
+        List<Maintenance> maintenances = maintenanceService.getAllMaintenance();
+        return new ResponseEntity<>(maintenances, HttpStatus.OK);
+>>>>>>> Pratik
     }
  
     @PutMapping("/api/technician/maintenance/update/{maintenanceId}")
     public ResponseEntity<Maintenance> updateMaintenance
             (@PathVariable Long maintenanceId, @RequestBody Maintenance updatedMaintenance) {
+<<<<<<< HEAD
         // Update the maintenance record with the given id and return updated record with status code 200 OK;
         try{
             maintenanceService.updateMaintenance(maintenanceId, updatedMaintenance);
@@ -36,6 +51,10 @@ public class TechnicianController {
         }catch(SQLException e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+=======
+        Maintenance updatedRecord = maintenanceService.updateMaintenance(maintenanceId, updatedMaintenance);
+        return new ResponseEntity<>(updatedRecord, HttpStatus.OK);
+>>>>>>> Pratik
     }
 }
  

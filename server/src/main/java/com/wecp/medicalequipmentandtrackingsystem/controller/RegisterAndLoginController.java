@@ -53,4 +53,8 @@ public class RegisterAndLoginController {
 
         return ResponseEntity.ok(new LoginResponse(token, user.getUsername(), user.getEmail(), user.getRole()));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Pratik

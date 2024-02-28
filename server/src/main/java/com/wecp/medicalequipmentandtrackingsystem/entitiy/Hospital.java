@@ -8,10 +8,15 @@ import lombok.NoArgsConstructor;
  
 import javax.persistence.*;
 import java.util.List;
+<<<<<<< HEAD
  
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+=======
+
+@Entity
+>>>>>>> Pratik
 @Table(name = "hospital")
 public class Hospital {
     @Id
@@ -19,8 +24,14 @@ public class Hospital {
     private Long id;
     private String name;
     private String location;
+<<<<<<< HEAD
    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospital")
+=======
+    // Add other hospital-related fields as needed
+
+    @OneToMany(mappedBy = "hospital")
+>>>>>>> Pratik
     @JsonIgnore
     private List<Equipment> equipmentList;
  

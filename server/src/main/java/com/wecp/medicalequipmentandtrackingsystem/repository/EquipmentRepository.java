@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+<<<<<<< HEAD
 public interface EquipmentRepository extends JpaRepository<Equipment, Long>{
     // extent jpa repository and add custom methods if needed
     public List<Equipment> findByHospitalId(Long HospitalId);
+=======
+public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
+    List<Equipment> findByHospitalId(Long hospitalId);
+>>>>>>> Pratik
 }

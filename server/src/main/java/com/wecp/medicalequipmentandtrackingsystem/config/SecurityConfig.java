@@ -31,7 +31,7 @@ public class SecurityConfig {
     private JwtRequestFilter authFilter;
 
     @Bean
-    // authentication
+    //authentication
     public UserDetailsService userDetailsService() {
         return new UserService();
     }
@@ -39,21 +39,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
+        
 
-                .authorizeRequests()
-                .requestMatchers(new CustomRequestMatcher("/api/user", "/api/user/login", "/api/user/register",
-                        "/api/hospital/create", "/api/hospital/equipment"))
-                .permitAll()
-                .requestMatchers(new CustomRequestMatcher("/api/**")).authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+           
+        .authorizeRequests()
+            .requestMatchers(new CustomRequestMatcher("/api/user", "/api/user/login","/api/user/register","/api/hospital/create","/api/hospital/equipment")).permitAll()
+            .requestMatchers(new CustomRequestMatcher("/api/**")).authenticated()
+        .and()
+        .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authenticationProvider(authenticationProvider())
+        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
     }
 
+    
     @Bean
     public PasswordEncoder passwordEncoders() {
         return new BCryptPasswordEncoder();
@@ -71,6 +72,8 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+
 
     private static class CustomRequestMatcher implements RequestMatcher {
         private String[] patterns;

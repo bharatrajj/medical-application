@@ -10,12 +10,20 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.util.List;
 
+=======
+>>>>>>> Pratik
 @Service
 public class EquipmentService {
 
+    @Autowired
+    private EquipmentRepository equipmentRepository;
+
+    @Autowired
+    private HospitalRepository hospitalRepository;
 
     @Autowired
     private EquipmentRepository equipmentRepository;
@@ -25,6 +33,7 @@ public class EquipmentService {
  
  
     public Equipment addEquipment(Long hospitalId, Equipment equipment) {
+<<<<<<< HEAD
  
         // check if hospital exists
         Hospital hospital=hospitalRepository.findById(hospitalId).orElseThrow(()->new EntityNotFoundException("Hospital with "+hospitalId+" doesnot exists."));
@@ -41,4 +50,18 @@ public class EquipmentService {
  
     }
     
+=======
+        // Check if the hospital with the given ID exists
+        Hospital hospital = hospitalRepository.findById(hospitalId)
+                .orElseThrow(() -> new EntityNotFoundException("Hospital not found with ID: " + hospitalId));
+
+        // Set the hospital for the equipment
+        equipment.setHospital(hospital);
+        return equipmentRepository.save(equipment);
+    }
+
+    public List<Equipment> getAllEquipmentOfHospital(Long hospitalId) {
+        return equipmentRepository.findByHospitalId(hospitalId);
+    }
+>>>>>>> Pratik
 }

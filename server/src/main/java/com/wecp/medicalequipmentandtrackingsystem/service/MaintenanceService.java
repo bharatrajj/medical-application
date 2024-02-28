@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.util.List;
 
@@ -31,11 +32,35 @@ public class MaintenanceService {
         Equipment e = equipmentRepository.findById(equipmentId)
                 .orElseThrow(() -> new EntityNotFoundException("Equipment does not" + equipmentId + "exists"));
         maintenance.setEquipment(e);
+=======
+@Service
+public class MaintenanceService {
+
+    @Autowired
+    private MaintenanceRepository maintenanceRepository;
+
+    @Autowired
+    private EquipmentRepository equipmentRepository;
+
+
+    public List<Maintenance> getAllMaintenance() {
+        return maintenanceRepository.findAll();
+    }
+
+    public Maintenance scheduleMaintenance(Long equipmentId, Maintenance maintenance) {
+        Equipment equipment = equipmentRepository.findById(equipmentId)
+                .orElseThrow(() -> new EntityNotFoundException("Equipment not found with ID: " + equipmentId));
+
+        // Set the equipment for the maintenance task
+        maintenance.setEquipment(equipment);
+
+>>>>>>> Pratik
         return maintenanceRepository.save(maintenance);
     }
 
     public Maintenance updateMaintenance(Long maintenanceId, Maintenance updatedMaintenance) throws SQLException {
         // Check if the maintenance record with the given ID exists
+<<<<<<< HEAD
         Maintenance m = maintenanceRepository.findById(maintenanceId)
                 .orElseThrow(() -> new EntityNotFoundException("Maintainance is" + maintenanceId + "doesnt exists"));
         m.setDescription(updatedMaintenance.getDescription());
@@ -46,5 +71,15 @@ public class MaintenanceService {
 
         return maintenanceRepository.save(updatedMaintenance);
         // update maintenance record
+=======
+        Maintenance existingMaintenance = maintenanceRepository.findById(maintenanceId)
+                .orElseThrow(() -> new EntityNotFoundException("Maintenance record not found with ID: " + maintenanceId));
+
+        updatedMaintenance.setId(existingMaintenance.getId());
+        updatedMaintenance.setEquipment(existingMaintenance.getEquipment());
+
+        // Save the updated maintenance record
+        return maintenanceRepository.save(updatedMaintenance);
+>>>>>>> Pratik
     }
 }

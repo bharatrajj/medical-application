@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
+<<<<<<< HEAD
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "equipments")
@@ -13,15 +14,28 @@ public class Equipment {
  
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+=======
+@Table(name = "equipments")
+public class Equipment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> Pratik
     private Long id;
  
     private String name;
     private String description;
+<<<<<<< HEAD
  
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="hospital_id")
     private Hospital hospital;
  
+=======
+    @ManyToOne
+    @JoinColumn(name = "hospitalId")
+    private Hospital hospital; // Many equipment can belong to one hospital
+
+>>>>>>> Pratik
     public Long getId() {
         return id;
     }
