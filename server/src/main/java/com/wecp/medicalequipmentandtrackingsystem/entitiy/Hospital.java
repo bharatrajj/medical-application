@@ -1,42 +1,69 @@
 package com.wecp.medicalequipmentandtrackingsystem.entitiy;
-
-
+ 
+ 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+ 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
+ 
 import javax.persistence.*;
 import java.util.List;
-
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+<<<<<<< HEAD
+ 
 @Entity
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+=======
+
+@Entity
+>>>>>>> Pratik
+@Table(name = "hospital")
 public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String location;
-    
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
+<<<<<<< HEAD
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospital")
+=======
+    // Add other hospital-related fields as needed
+
+    @OneToMany(mappedBy = "hospital")
+>>>>>>> Pratik
     @JsonIgnore
     private List<Equipment> equipmentList;
-
+ 
+    public Long getId() {
+        return id;
+    }
+ 
+    public void setId(Long id) {
+        this.id = id;
+    }
+ 
+    public String getName() {
+        return name;
+    }
+ 
+    public void setName(String name) {
+        this.name = name;
+    }
+ 
+    public String getLocation() {
+        return location;
+    }
+ 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+ 
+    public List<Equipment> getEquipmentList() {
+        return equipmentList;
+    }
+ 
+    public void setEquipmentList(List<Equipment> equipmentList) {
+        this.equipmentList = equipmentList;
+    }
 }
-
-
-
-
-
-
-
-
-

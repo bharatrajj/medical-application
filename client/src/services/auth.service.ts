@@ -24,12 +24,13 @@ export class AuthService {
   }
   // Method to retrieve login status
   get getLoginStatus(): boolean {
-  
+  return false;
       //please complete this
    
   }
   getToken(): string | null {
-  //please complete this
+  //please complete this\
+  return null
   }
   logout(){
     //please complete this
