@@ -25,7 +25,6 @@ export class CreatehospitalComponent implements OnInit {
     {
       this.itemForm = this.formBuilder.group({
         name: [this.formModel.name,[ Validators.required]],
-<<<<<<< HEAD
         location: [this.formModel.location,[ Validators.required]],
        
     });
@@ -33,21 +32,11 @@ export class CreatehospitalComponent implements OnInit {
     this.equipmentForm = this.formBuilder.group({
       name: [this.formModel.name,[ Validators.required]],
       description: [this.formModel.description,[ Validators.required]],
-=======
-        location: [this.formModel.location,[ Validators.required]], 
-       
-    });
-
-    this.equipmentForm = this.formBuilder.group({
-      name: [this.formModel.name,[ Validators.required]],
-      description: [this.formModel.description,[ Validators.required]], 
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
       hospitalId: [this.formModel.hospitalId,[ Validators.required]],
      
   });
   }
   ngOnInit(): void {
-<<<<<<< HEAD
  
     this.getHospital();
   }
@@ -56,27 +45,12 @@ export class CreatehospitalComponent implements OnInit {
     this.httpService.getHospital().subscribe((data: any) => {
       this.hospitalList=data;
       //console.log(this.hospitalList);
-=======
-
-    this.getHospital();
-  }
-  getHospital() {
-    this.hospitalList=[];
-    this.httpService.getHospital().subscribe((data: any) => {
-      this.hospitalList=data;
-      console.log(this.hospitalList);
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
     }, error => {
       // Handle error
       this.showError = true;
       this.errorMessage = "An error occurred while logging in. Please try again later.";
-<<<<<<< HEAD
       //console.error('Login error:', error);
     });
-=======
-      console.error('Login error:', error);
-    });;
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
   }
  
  
@@ -84,7 +58,6 @@ export class CreatehospitalComponent implements OnInit {
   {
     if(this.itemForm.valid)
     {
-<<<<<<< HEAD
       if (this.itemForm.valid) 
       {
         this.showError = false;
@@ -95,28 +68,14 @@ export class CreatehospitalComponent implements OnInit {
          
         }, error => 
         {
-=======
-      if (this.itemForm.valid) {
-        this.showError = false;
-        this.httpService.createHospital(this.itemForm.value).subscribe((data: any) => {
-          this.itemForm.reset();
-          this.getHospital();
-          
-        }, error => {
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
           // Handle error
           this.showError = true;
           this.errorMessage = "An error occurred while logging in. Please try again later.";
           console.error('Login error:', error);
-<<<<<<< HEAD
         });
       } 
       else 
       {
-=======
-        });;
-      } else {
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
         this.itemForm.markAllAsTouched();
       }
     }
@@ -126,11 +85,7 @@ export class CreatehospitalComponent implements OnInit {
   }
   Addequipment(value:any)
   {
-<<<<<<< HEAD
    
-=======
-    
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
     debugger;
     this.equipmentForm.controls['hospitalId'].setValue(value.id);
   }
@@ -143,7 +98,6 @@ export class CreatehospitalComponent implements OnInit {
      this.showMessage=true;
      this.responseMessage=`Equipment added successfully`;
      
-<<<<<<< HEAD
       }, 
       error => 
       {
@@ -160,18 +114,3 @@ export class CreatehospitalComponent implements OnInit {
   }
  
 }
-=======
-      }, error => {
-        // Handle error
-        this.showError = true;
-        this.errorMessage = "An error occurred while logging in. Please try again later.";
-        console.error('Login error:', error);
-      });;
-    }
-    else{
-      this.equipmentForm.markAllAsTouched();
-    }
-  }
-  
-}
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
