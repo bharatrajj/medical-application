@@ -1,7 +1,8 @@
+
 <div class="d-flex justify-content-between mt-4">
-  <h2 class="mb-0">Scheduled Maintenance</h2>  
+  <h2 class="mb-0">Schedule Maintenance</h2>  
 </div>
-<div class="row mt-3">
+<div class="col mt-3">
   <div class="card">
       <div class="card-header">
           Scheduled Maintenance of Equipment
@@ -13,13 +14,19 @@
                   <div class="mb-3">
                     <label for="content" class="form-label">Hospitals</label>
                           <!-- //create select with formControlName="hospitalId" and validation -->
-                    <select name="hospitalId" class="form-control" id="hospitalId" formControlName="hospitalId" (change)="onHospitalSelect($event)">
-                     
+                    <select name="hospitalId" class="form-control" id="hospitalId" formControlName="hospitalId" (change)="onHospitalSelect($event)" ngModel="formModel.hospitalId">
+                      <option *ngFor="let hospital of hospitalList" [value]="hospital.id">{{ hospital.name }}</option>
                     </select>
-                    
+                    <div *ngIf="itemForm.controls['hospitalId'].invalid && (itemForm.controls['hospitalId'].dirty || itemForm.controls['hospitalId'].touched)" class="ng-dirty">
+                      <span *ngIf="itemForm.controls['hsopitalId'].errors" class="text-danger">Please choose Equipment.</span>
+                    </div>                  
                   </div>
+
                   <div class="mb-3">
                     <label for="content" class="form-label">Equipment</label>
+                    <select name="equipmentId" class="form-control" id="equipmentId" formControlName="equipmentId" (change)="onHospitalSelect($event)" ngModel="formModel.equipmentId">
+                      <option *ngFor="let equipment of equipmentList" [value]="equipment.id">{{ equipment.name }}</option>
+                    </select>
                        <!-- //create select with formControlName="equipmentId" and validation -->
                     <div *ngIf="itemForm.controls['equipmentId'].invalid && (itemForm.controls['equipmentId'].dirty || itemForm.controls['equipmentId'].touched)" class="ng-dirty">
                       <span *ngIf="itemForm.controls['equipmentId'].errors" class="text-danger">Please choose Equipment.</span>
@@ -31,13 +38,20 @@
                     <div class="col-md-6">
                       <div class="mb-3">
                         <label for="content" class="form-label">Scheduled Date</label>
+                        <input type="date" id="scheduledDate" name="scheduledDate" formControlName="scheduledDate" class="form-control" ngModel="formModel.scheduledDate">
+                        <div *ngIf="itemForm.controls['scheduledDate'].invalid && (itemForm.controls['scheduledDate'].dirty || itemForm.controls['scheduledDate'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['scheduledDate'].errors && itemForm.controls['scheduledDate']?.hasError('invalidDate')" class="text-danger">Please choose Date.</span>
+                        </div>
                           <!-- //create input with formControlName="scheduledDate" and validation -->
-                        
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
                         <label for="completedDate" class="form-label">Completed Date</label>
+                        <input type="date" id="completedDate" name="completedDate" formControlName="completedDate" class="form-control" ngModel="formModel.completedDate">
+                        <div *ngIf="itemForm.controls['completedDate'].invalid && (itemForm.controls['completedDate'].dirty || itemForm.controls['completedDate'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['completedDate'].errors && itemForm.controls['completedDate']?.hasError('invalidDate')" class="text-danger">Please choose Date.</span>
+                        </div>
                          <!-- //create input with formControlName="completedDate" and validation -->
                         
                       </div>
@@ -45,11 +59,26 @@
                   </div>
                   <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
+                    <input type="text" id="description" name="description" formControlName="description" class="form-control" ngModel="">
+                    <div *ngIf="itemForm.controls['description'].invalid && (itemForm.controls['description'].dirty || itemForm.controls['description'].touched)" class="ng-dirty">
+                      <span *ngIf="itemForm.controls['description'].errors" class="text-danger">Please Enter Description.</span>
+                    </div>
                      <!-- //create input with formControlName="description" and validation -->
                   
                   </div>
                   <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
+                    <select name="status" class="form-control" id="status" formControlName="status" ngModel="formModel.status">
+                          <option value="">Select</option>
+                          <option>Initiated</option>
+                          <option>In-Transit</option>
+                          <option>Delivered</option>
+                    </select>
+                       <!-- //create select with formControlName="equipmentId" and validation -->
+                    <div *ngIf="itemForm.controls['status'].invalid && (itemForm.controls['status'].dirty || itemForm.controls['status'].touched)" class="ng-dirty">
+                      <span *ngIf="itemForm.controls['status'].errors" class="text-danger">Please choose Equipment.</span>
+                    </div>
+                    
                       <!-- //create select with formControlName="status" and validation -->
                   
                    

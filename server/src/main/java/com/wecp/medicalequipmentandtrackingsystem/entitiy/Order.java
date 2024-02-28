@@ -1,36 +1,40 @@
 package com.wecp.medicalequipmentandtrackingsystem.entitiy;
-
-
+ 
+ 
 import javax.persistence.*;
 
+ 
 import java.sql.Date;
-
-
-
-public class OrderData {
-
-    
+//import java.time.LocalDate;
+ 
+@Entity
+@Table(name="orders")
+public class Order {
+ 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Date orderDate;     
+ 
+    private Date orderDate;    
     private String status;
     private int quantity;
-
-  
+ 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="equipment_id")
     private Equipment equipment;
-    
-
-    public OrderData() {
-    }
-    
    
-
-    public OrderData(Equipment equipment) {
+ 
+    public Order() {
+    }
+   
+   
+ 
+    public Order(Equipment equipment) {
         this.equipment = equipment;
     }
-
-
-
+ 
+ 
+ 
     public Long getId() {
         return id;
     }
@@ -55,19 +59,20 @@ public class OrderData {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-
-
+ 
+ 
+ 
     public Equipment getEquipment() {
         return equipment;
     }
-
-
-
+ 
+ 
+ 
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
     }
-
-    
-    
+ 
+   
+   
 }
+ 

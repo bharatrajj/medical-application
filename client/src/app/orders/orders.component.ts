@@ -17,18 +17,20 @@ export class OrdersComponent implements OnInit {
 
    showMessage: any;
    responseMessage: any;
-   orderList: any=[];
+   orderList: any=[]
 
    statusModel:any={newStatus:null}
    constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
   {
   }  
  ngOnInit(): void {
-  
+    this.getOrders();
    }  
  
    getOrders() {
      //complete this function
+     this.orderList=this.httpService.getorders();
+
    }
    viewDetails(details:any)
    {
@@ -41,6 +43,7 @@ export class OrdersComponent implements OnInit {
    update()
    {
     //complete this function
+
    }
  }
  

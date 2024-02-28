@@ -104,12 +104,15 @@ export class HttpService {
     //complete this function
     return this.http.post(`${this.serverName}/api/hospital/create`,details);
   }
-  // Login(details: any): Observable<any> {
-  //   //complete this function
-  // }
-  // registerUser(details: any): Observable<any> {
-  //   //complete this function
-  // }
+  Login(details: any): Observable<any> {
+    //complete this function
+    const url = `${this.serverName}/api/user/login`;
+    return this.http.post(url, details);
+  }
+  registerUser(details: any): Observable<any> {
+    //complete this function
+    return this.http.post(`${this.serverName}/api/user/register`, details);
+  }
  
  
  
