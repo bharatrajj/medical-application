@@ -2,13 +2,9 @@ package com.wecp.medicalequipmentandtrackingsystem.config;
 
 import com.wecp.medicalequipmentandtrackingsystem.jwt.JwtRequestFilter;
 import com.wecp.medicalequipmentandtrackingsystem.service.UserService;
-<<<<<<< HEAD
-import javax.servlet.http.HttpServletRequest;
-=======
 
 import javax.servlet.http.HttpServletRequest;
 
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,22 +22,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-<<<<<<< HEAD
-=======
-
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
     private JwtRequestFilter authFilter;
-<<<<<<< HEAD
-    @Bean
-    //authentication
-    public UserDetailsService userDetailsService() {
-    return new UserService();
-=======
 
     @Bean
     //authentication
@@ -79,71 +65,8 @@ public class SecurityConfig {
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoders());
         return authenticationProvider;
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
     }
     @Bean
-<<<<<<< HEAD
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
-    Exception {
-    return http.csrf().disable()
-    .authorizeRequests()
-    .requestMatchers(new CustomRequestMatcher("/api/user",
-    "/api/user/login",
-    "/api/user/register",
-    "/api/hospital/create",
-    "/api/hospital/equipment",
-    "/api/hospitals",
-    "/api/hospital/maintenance/schedule",
-    "/api/hospital/order",
-    "/api/technician/maintenance",
-    "/api/supplier/orders"
-    )).permitAll()
-    .antMatchers("/api/**").authenticated()
-    .and()
-    .sessionManagement()
-    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-    .and()
-    .authenticationProvider(authenticationProvider())
-    .addFilterBefore(authFilter,
-    UsernamePasswordAuthenticationFilter.class)
-    .build();
-}
-@Bean
-public PasswordEncoder passwordEncoders() {
-return new BCryptPasswordEncoder();
-}
-@Bean
-public AuthenticationProvider authenticationProvider(){
-DaoAuthenticationProvider authenticationProvider=new
-DaoAuthenticationProvider();
-authenticationProvider.setUserDetailsService(userDetailsService());
-authenticationProvider.setPasswordEncoder(passwordEncoders());
-return authenticationProvider;
-}
-@Bean
-public AuthenticationManager
-authenticationManager(AuthenticationConfiguration config) throws Exception {
-return config.getAuthenticationManager();
-}
-private static class CustomRequestMatcher implements RequestMatcher {
-private String[] patterns;
-public CustomRequestMatcher(String... patterns) {
-this.patterns = patterns;
-}
-@Override
-public boolean matches(HttpServletRequest request) {
-// TODO Auto-generated method stub
-String requestURI = request.getRequestURI();
-for (String pattern : patterns) {
-if (requestURI.matches(pattern)) {
-    return true;
-}
-}
-return false;
-}
-}
-}
-=======
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
@@ -171,4 +94,3 @@ return false;
     }
 
 }
->>>>>>> 353971eb3ca117f2e834180caa08f55a069e4998
