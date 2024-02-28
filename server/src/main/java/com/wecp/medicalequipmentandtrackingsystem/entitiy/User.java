@@ -1,17 +1,14 @@
 package com.wecp.medicalequipmentandtrackingsystem.entitiy;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Getter
 @Setter
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,6 +19,5 @@ public class User {
     private String password;
     private String email;
     private String role; // HOSPITAL, TECHNICIAN, SUPPLIER
-
     
 }
