@@ -15,13 +15,14 @@ export class OrdersComponent implements OnInit {
    showError:boolean=false;
    errorMessage:any;
 
-   showMessage: any;
+   showMessage: any=false;
    responseMessage: any;
    orderList: any=[];
 
    statusModel:any={newStatus:null}
    constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
   {
+    //remove the formbuilder and authservice
   }  
  ngOnInit(): void {
    this.getOrders();
@@ -39,32 +40,32 @@ export class OrdersComponent implements OnInit {
        console.error('Login error:', error);
      });;
    }
-   viewDetails(details:any)
-   {
-    
-   }
+   
    edit(value:any)
    {
     this.statusModel.cargoId=value.id
+    this.showMessage=false;
    }
    update()
-   {
+   { 
+   
     if(this.statusModel.newStatus!=null)
-    {
-      this.showMessage = false;
+    {   
       this.httpService.UpdateOrderStatus(this.statusModel.newStatus,this.statusModel.cargoId).subscribe((data: any) => {
-        debugger;
         this.showMessage = true;
         this.responseMessage=`Status updated`;
         this.getOrders();
+        
       }, error => {
         // Handle error
         this.showError = true;
         this.errorMessage = "An error occurred while logging in. Please try again later.";
         console.error('Login error:', error);
-      });;
+      });
+      
     }
    }
+   
  }
  
  

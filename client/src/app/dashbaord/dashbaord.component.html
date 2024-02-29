@@ -1,3 +1,8 @@
 <div class="row text-center">
-<h1 class="text-capitalize">Medical Equipment & Tracking System</h1>
+ <div *ngIf="roleType=='HOSPITAL'">
+    <h1>Welcome To Admin Hospital Page</h1>
+</div>
+ <div *ngIf="roleType=='SUPPLIER'">
+    <h1>Welcome to Supplier</h1>
+</div>
 </div>

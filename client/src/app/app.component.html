@@ -18,6 +18,9 @@
  
       </li>
       <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/status-techinican']">Status of Techinican</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/team']">About Us</a>
       </li>
      

@@ -1,0 +1,30 @@
+/* Navbar styling */
+.navbar {
+    background-color: #343a40; /* Dark background color */
+  }
+  
+  .navbar-brand {
+    color: #fff; /* White text color */
+  }
+  
+  .navbar-nav .nav-link {
+    color: #fff; /* White text color */
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #aaa; /* Lighter text color on hover */
+  }
+  
+  /* Container styling */
+  .container {
+    margin-top: 4rem; /* Top margin */
+    margin-left: 5rem; /* Left margin */
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .container {
+      margin-left: 0; /* Reset left margin for smaller screens */
+    }
+  }
+  

@@ -25,8 +25,8 @@ export class ScheduleMaintenanceComponent implements OnInit {
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
     {
       this.itemForm = this.formBuilder.group({
-        scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
-        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
+        scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
+        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
         description: [this.formModel.description,[ Validators.required]], 
         status: [this.formModel.status,[ Validators.required]], 
         equipmentId: [this.formModel.equipmentId,[ Validators.required]], 
@@ -42,13 +42,23 @@ export class ScheduleMaintenanceComponent implements OnInit {
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    const currentDate = new Date();
-    const selectedDate = new Date(control.value);
-    if (!datePattern.test(control.value)||selectedDate>currentDate) {
+  
+    if (!datePattern.test(control.value)) {
       return { invalidDate: true };
     }
     return null;
   }
+
+  dateValidator2(control: AbstractControl): ValidationErrors | null {
+
+    const currentDate = new Date();
+    const selectedDate = new Date(control.value);
+    if (selectedDate<currentDate) {
+      return { invalidDate: true };
+    }
+    return null;
+  }
+  
   
     
   
