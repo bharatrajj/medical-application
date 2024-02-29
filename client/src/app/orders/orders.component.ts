@@ -47,6 +47,12 @@ export class OrdersComponent implements OnInit {
    {
     this.statusModel.cargoId=value.id
    }
+  //  disable(){
+  //   if(this.statusModel.newStatus==="Delivered"){
+  //     const bt = document.getElementById('btn') as HTMLButtonElement | null;
+  //     bt?.setAttribute('disabled', '');
+  //   }
+  //  }
    update()
    {
     if(this.statusModel.newStatus!=null)
