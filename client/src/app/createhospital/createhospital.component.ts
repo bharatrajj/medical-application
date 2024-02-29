@@ -5,6 +5,7 @@ import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
 
 
+
 @Component({
   selector: 'app-createhospital',
   templateUrl: './createhospital.component.html',
@@ -60,6 +61,7 @@ export class CreatehospitalComponent implements OnInit {
         this.httpService.createHospital(this.itemForm.value).subscribe((data: any) => {
           this.itemForm.reset();
           this.getHospital();
+        
 
         }, error => {
           // Handle error
@@ -82,11 +84,14 @@ export class CreatehospitalComponent implements OnInit {
   }
   submitEquipment() {
     if (this.equipmentForm.value) {
+      
       this.showMessage = false;
       this.httpService.addEquipment(this.equipmentForm.value, this.equipmentForm.controls['hospitalId'].value).subscribe((data: any) => {
         this.showMessage = true;
         this.responseMessage = `Equipment added successfully`;
-
+        
+        this.equipmentForm.reset()
+        
       }, error => {
         // Handle error
         this.showError = true;

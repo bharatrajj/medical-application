@@ -51,8 +51,10 @@ export class RequestequipmentComponent implements OnInit {
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    const selectedDate=new Date(control.value)
+    const currentDate=new Date()
 
-    if (!datePattern.test(control.value)) {
+    if (!datePattern.test(control.value)|| selectedDate>currentDate) {
       return { invalidDate: true };
     }
 
@@ -66,7 +68,7 @@ export class RequestequipmentComponent implements OnInit {
       if (this.itemForm.valid) {
         this.showError = false;
       
-        this.httpService.orderEquipment(this.itemForm.value,1).subscribe((data: any) => {
+        this.httpService.orderEquipment(this.itemForm.value,this.itemForm.value.equipmentId).subscribe((data: any) => {
           this.itemForm.reset();
           this.showMessage=true;
           this.responseMessage='Save Successfully';

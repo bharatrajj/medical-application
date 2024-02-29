@@ -20,7 +20,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let Maintenancef maintenanceList">
+                    <tbody *ngFor="let Maintenancef of maintenanceList">
                         <tr >
                             <td>{{Maintenancef.id}}</td>
                             <td>{{Maintenancef.scheduledDate | date: 'dd-MMM-yyyy'}}</td>                  
@@ -34,7 +34,7 @@
                             <td>
                                 <p>Id:{{Maintenancef.equipment.hospital.id}}</p>
                                 <p>Name:{{Maintenancef.equipment.hospital.name}}</p>
-                                <p>Description:{{Maintenancef.equipment.hospital.description}}</p>
+                                <p>Location:{{Maintenancef.equipment.hospital.location}}</p>
                             </td>
                             <td>
                                 <button  data-bs-toggle="modal" (click)="edit(Maintenancef)" data-bs-target="#driverModal"  class="btn btn-warning">Edit</button>

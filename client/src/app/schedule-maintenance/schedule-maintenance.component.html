@@ -1,17 +1,17 @@
 <div class="d-flex justify-content-between mt-4">
-  <h2 class="mb-0">Scheduled Maintenance</h2>  
+  <h2 class="mb-0">Schedule Maintenance</h2>  
 </div>
 <div class="row mt-3">
   <div class="card">
       <div class="card-header">
-          Scheduled Maintenance of Equipment
+          Schedule Maintenance of Equipment
       </div>
       <div class="card-body">
           <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="content" class="form-label">Hospitals</label>
+                    <label for="content" class="form-label">Hospital</label>
                     <select name="hospitalId" class="form-control" id="hospitalId" formControlName="hospitalId" (change)="onHospitalSelect($event)">
                       <option value="null">Please Choose</option>
                       <option *ngFor="let hos of hospitalList" [value]="hos.id">{{ hos.name }}</option>
@@ -38,7 +38,7 @@
                         <label for="content" class="form-label">Scheduled Date</label>
                         <input type="date" name="scheduledDate" formControlName="scheduledDate" class="form-control" id="scheduledDate" placeholder="Scheduled Date">
                         <div *ngIf="itemForm.controls['scheduledDate'].invalid && (itemForm.controls['scheduledDate'].dirty || itemForm.controls['scheduledDate'].touched)" class="ng-dirty">
-                          <span *ngIf="itemForm.controls['scheduledDate'].errors" class="text-danger">Please Enter Scheduled Date.</span>
+                          <span *ngIf="itemForm.controls['scheduledDate'].errors" class="text-danger">Please Enter Valid Scheduled Date.</span>
                         </div>
                       </div>
                     </div>
@@ -47,7 +47,7 @@
                         <label for="completedDate" class="form-label">Completed Date</label>
                         <input type="date" name="completedDate" formControlName="completedDate" class="form-control" id="completedDate" placeholder="Completed Date">
                         <div *ngIf="itemForm.controls['completedDate'].invalid && (itemForm.controls['completedDate'].dirty || itemForm.controls['completedDate'].touched)" class="ng-dirty">
-                          <span *ngIf="itemForm.controls['completedDate'].errors" class="text-danger">Please Enter Completed Date.</span>
+                          <span *ngIf="itemForm.controls['completedDate'].errors" class="text-danger">Please Enter Valid Completed Date.</span>
                         </div>
                       </div>
                     </div>

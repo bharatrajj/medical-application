@@ -18,7 +18,7 @@ export class ScheduleMaintenanceComponent implements OnInit {
   errorMessage:any;
   hospitalList:any=[];
   assignModel: any={};
-
+  statusModel:any={}
   showMessage: any;
   responseMessage: any;
   equipmentList: any=[];
@@ -42,13 +42,16 @@ export class ScheduleMaintenanceComponent implements OnInit {
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-
-    if (!datePattern.test(control.value)) {
+    const currentDate = new Date();
+    const selectedDate = new Date(control.value);
+    if (!datePattern.test(control.value)||selectedDate>currentDate) {
       return { invalidDate: true };
     }
-
     return null;
   }
+  
+    
+  
   getHospital() {
     this.hospitalList=[];
     this.httpService.getHospital().subscribe((data: any) => {
@@ -69,7 +72,7 @@ export class ScheduleMaintenanceComponent implements OnInit {
       if (this.itemForm.valid) {
         this.showError = false;
       
-        this.httpService.scheduleMaintenance(this.itemForm.value,1).subscribe((data: any) => {
+        this.httpService.scheduleMaintenance(this.itemForm.value,this.itemForm.value.equipmentId).subscribe((data: any) => {
           this.itemForm.reset();
           this.showMessage=true;
           this.responseMessage='Save Successfully';
@@ -101,4 +104,5 @@ export class ScheduleMaintenanceComponent implements OnInit {
    });
   
 }
+
 }

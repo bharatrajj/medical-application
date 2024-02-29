@@ -19,9 +19,9 @@ export class RegistrationComponent {
 
     this.itemForm = this.formBuilder.group({
       //complete this function 
-      username: [this.formModel.username, Validators.required],
-      password: [this.formModel.password, Validators.required],
-      email: [this.formModel.email, Validators.required],
+      username: [this.formModel.username, Validators.required,Validators.minLength(5),Validators.maxLength(10)],
+      password: [this.formModel.password, Validators.required,Validators.minLength(5),Validators.maxLength(10),Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$")],
+      email: [this.formModel.email, Validators.required,Validators.email],
       role: [this.formModel.role, Validators.required]
 
     });

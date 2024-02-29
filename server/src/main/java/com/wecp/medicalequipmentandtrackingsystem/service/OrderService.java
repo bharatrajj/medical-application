@@ -27,7 +27,6 @@ public class OrderService {
                 .orElseThrow(() -> new EntityNotFoundException("Equipment not found with ID: " + equipmentId));
  
         order.setEquipment(equipment);
-        order.setOrderDate(new Date());
         order.setStatus("Initiated");
  
         // Save the order
