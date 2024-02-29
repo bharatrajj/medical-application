@@ -26,7 +26,7 @@ export class ScheduleMaintenanceComponent implements OnInit {
     {
       this.itemForm = this.formBuilder.group({
         scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
-        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
+        //completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
         description: [this.formModel.description,[ Validators.required]], 
         status: [this.formModel.status,[ Validators.required]], 
         equipmentId: [this.formModel.equipmentId,[ Validators.required]], 

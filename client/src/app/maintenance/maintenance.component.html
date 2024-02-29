@@ -13,7 +13,7 @@
                         <tr>
                             <th>Sr#</th>
                             <th>Scheduled Date</th>
-                            <th>Completion Date</th>
+                            <!-- <th>Completion Date</th> -->
                             <th>Status</th>      
                             <th>Equipment</th>   
                             <th>Hospital</th>                 
@@ -24,7 +24,7 @@
                         <tr >
                             <td>{{Maintenancef.id}}</td>
                             <td>{{Maintenancef.scheduledDate | date: 'dd-MMM-yyyy'}}</td>                  
-                            <td>{{Maintenancef.completedDate | date: 'dd-MMM-yyyy'}}</td>
+                            <!-- <td>{{Maintenancef.completedDate | date: 'dd-MMM-yyyy'}}</td> -->
                             <td>{{Maintenancef.status}}</td>
                             <td>
                                 <p>Id:{{Maintenancef.equipment.id}}</p>
@@ -71,13 +71,13 @@
                         <span *ngIf="itemForm.controls['scheduledDate'].errors" class="text-danger">Please Enter Scheduled Date.</span>
                     </div>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="completedDate" class="form-label ">Completed Date</label>
                     <input type="date" name="completedDate"  formControlName="completedDate" class="form-control" id="completedDate" placeholder="Completed Date">
                     <div *ngIf="itemForm.controls['completedDate'].invalid && (itemForm.controls['completedDate'].dirty || itemForm.controls['completedDate'].touched)" class="ng-dirty">
                         <span *ngIf="itemForm.controls['completedDate'].errors" class="text-danger">Please Enter Completed Date.</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="description" class="form-label ">Description</label>
                     <input type="text" name="description" formControlName="description" class="form-control" id="description" placeholder="Description">
@@ -89,8 +89,8 @@
                     <label for="status" class="form-label ">Status</label>
                     <select class="form-control" name="status" id="status" formControlName="status">
                         <option value="null">Choose Status</option>
-                        <option value="Initiated">Initiated</option>
-                        <option value="Complete">Complete</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Serviced">Serviced</option>
                     </select>
                     <div *ngIf="itemForm.controls['status'].invalid && (itemForm.controls['status'].dirty || itemForm.controls['status'].touched)" class="ng-dirty">
                         <span *ngIf="itemForm.controls['status'].errors" class="text-danger">Please choose status.</span>
@@ -99,7 +99,7 @@
                 <div class="col-md-2">
                     <div class="d-grid">
                         <br>
-                        <button class="btn" type="submit">Submit</button>
+                        <button class="btn btn-outline-dark mt-1" type="submit">Submit</button>
                     </div>
                 </div>
 

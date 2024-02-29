@@ -25,7 +25,7 @@ export class MaintenanceComponent implements OnInit {
     {
       this.itemForm = this.formBuilder.group({
         scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
-        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
+        //completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
         description: [this.formModel.description,[ Validators.required]], 
         status: [this.formModel.status,[ Validators.required]], 
         maintenanceId: [this.formModel.maintenanceId],
@@ -69,10 +69,10 @@ ngOnInit(): void {
   edit(val:any)
   {
     const scheduledDate =new Date(val.scheduledDate); 
-    const completedDate =new Date(val.completedDate); 
+    //const completedDate =new Date(val.completedDate); 
     this.itemForm.patchValue({
       scheduledDate:  scheduledDate.toISOString().substring(0, 10),
-      completedDate: completedDate.toISOString().substring(0, 10),
+      //completedDate: completedDate.toISOString().substring(0, 10),
       description: val.description,
       status: val.status,
       equipmentId: val.equipmentId,
