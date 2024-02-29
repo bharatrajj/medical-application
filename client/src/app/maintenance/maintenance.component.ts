@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
- 
- 
+
+
 @Component({
   selector: 'app-maintenance',
   templateUrl: './maintenance.component.html',
@@ -16,65 +16,91 @@ export class MaintenanceComponent implements OnInit {
   showError:boolean=false;
   errorMessage:any;
   hospitalList:any=[];
-  assignModel: any={};
   itemForm: FormGroup;
   showMessage: any;
   responseMessage: any;
   maintenanceList: any=[];
   maintenanceObj: any={};
-  constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
+  constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
     {
-      // this.itemForm = //complete this function
-      this.itemForm=this.formBuilder.group({
-        maintenanceId:['',[Validators.required]],
-        scheduledDate:['',[Validators.required]],
-        completedDate:['',[Validators.required]],
-        description:['',[Validators.required]],
-        status:['',[Validators.required]]
-      })
-     
+      this.itemForm = this.formBuilder.group({
+        scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
+        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
+        description: [this.formModel.description,[ Validators.required]], 
+        status: [this.formModel.status,[ Validators.required]], 
+        maintenanceId: [this.formModel.maintenanceId],
  
- 
- 
+       
+    });
+
+
+
 }  
 ngOnInit(): void {
   this.getMaintenance();
   }  
   dateValidator(control: AbstractControl): ValidationErrors | null {
-    //complete this function
-    const pattern=/^\d{4}-\d{2}-\d{2}%/;         // for Date Validation regix
-    if(pattern.test(control.value)){
-      return {invalidDate:true}
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+    if (!datePattern.test(control.value)) {
+      return { invalidDate: true };
     }
+
     return null;
   }
   getMaintenance() {
-  //complete this function
-  this.httpService.getMaintenance().subscribe(data=>{
-    this.maintenanceList=data;
-  })
+    this.maintenanceList=[];
+    this.httpService.getMaintenance().subscribe((data: any) => {
+      this.maintenanceList=data;
+     console.log(data)
+    }, error => {
+      // Handle error
+      this.showError = true;
+      this.errorMessage = "An error has Occured.Try again";
+      console.error('Login error:', error);
+    });;
   }
   viewDetails(details:any)
   {
-    //complete this function
-   
+    debugger;
+    this.maintenanceObj={};
+    this.maintenanceObj=details.equipment;
   }
   edit(val:any)
   {
-   //complete this function
-   this.itemForm.patchValue({
-    maintenanceId:val.id,
-    scheduledDate:val.scheduledDate,
-    completedDate:val.completedDate,
-    description:val.description,
-    status:val.status
-   });
- 
-}
-update()
-{
-    this.httpService.updateMaintenance(this.itemForm.value,this.itemForm.value.id).subscribe((response)=>{
-             this.responseMessage=response;
-    })
-}
+    const scheduledDate =new Date(val.scheduledDate); 
+    const completedDate =new Date(val.completedDate); 
+    this.itemForm.patchValue({
+      scheduledDate:  scheduledDate.toISOString().substring(0, 10),
+      completedDate: completedDate.toISOString().substring(0, 10),
+      description: val.description,
+      status: val.status,
+      equipmentId: val.equipmentId,
+      maintenanceId:val.id
+  });
+  }
+  update()
+  {
+    if(this.itemForm.valid)
+    {
+      if (this.itemForm.valid) {
+        this.showError = false;
+        this.httpService.updateMaintenance(this.itemForm.value,this.itemForm.controls['maintenanceId'].value).subscribe((data: any) => {
+          this.itemForm.reset();
+      
+          window.location.reload();
+        }, error => {
+          // Handle error
+          this.showError = true;
+          this.errorMessage = "An error occurred while Loggin in Please Try Again";
+          console.error('Login error:', error);
+        });;
+      } else {
+        this.itemForm.markAllAsTouched();
+      }
+    }
+    else{
+      this.itemForm.markAllAsTouched();
+    }
+  }
 }

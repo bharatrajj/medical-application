@@ -1,6 +1,5 @@
 package com.wecp.medicalequipmentandtrackingsystem.jwt;
 
-
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.User;
 import com.wecp.medicalequipmentandtrackingsystem.repository.UserRepository;
 import io.jsonwebtoken.Claims;

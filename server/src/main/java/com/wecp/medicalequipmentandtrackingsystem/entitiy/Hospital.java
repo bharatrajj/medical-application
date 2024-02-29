@@ -3,21 +3,23 @@ package com.wecp.medicalequipmentandtrackingsystem.entitiy;
  
 import com.fasterxml.jackson.annotation.JsonIgnore;
  
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
  
 import javax.persistence.*;
 import java.util.List;
-
+ 
 @Entity
-@Table(name = "hospital")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String location;
-    // Add other hospital-related fields as needed
-
-    @OneToMany(mappedBy = "hospital")
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospital")
     @JsonIgnore
     private List<Equipment> equipmentList;
  
