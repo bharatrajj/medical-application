@@ -21,8 +21,13 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        if(userRepository.findByRole(user.getRole()) != null || userRepository.findByUsername(user.getUsername()) != null){
+            return null;
+        }else{
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
+        }
+        
     }
 
     public User getUserByUsername(String username) {

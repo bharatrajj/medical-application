@@ -42,10 +42,14 @@ export class RegistrationComponent {
     this.bookService.registerUser(this.itemForm.value).subscribe(
       (response: any) => {
         this.showMessage = true;
+        if(response==null){
+          this.showMessage=false;
+          this.responseMessage="Try with another username or role";
+        }
         this.responseMessage = response.message || 'Registration successful.';
       },
       (error: any) => {
-        this.showMessage = true;
+        this.showMessage = false;
         this.responseMessage = 'An error occurred while registering.';
       }
     );
