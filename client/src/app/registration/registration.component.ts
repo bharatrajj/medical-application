@@ -13,12 +13,16 @@ export class RegistrationComponent {
   itemForm: FormGroup;
   formModel: any = { role: null, email: '', password: '', username: '' };
   showMessage: boolean = false;
-
+  showError:boolean=false;
   responseMessage: any;
   constructor(public router: Router, private bookService: HttpService, private formBuilder: FormBuilder) {
 
     this.itemForm = this.formBuilder.group({
+<<<<<<< HEAD
       //complete this function 
+=======
+      //complete this function
+>>>>>>> mani
       username: [this.formModel.username, Validators.required],
       password: [this.formModel.password, Validators.required],
       email: [this.formModel.email, Validators.required],
@@ -31,27 +35,30 @@ export class RegistrationComponent {
   }
 
   onRegister() {
-    
-  //   if (this.itemForm.invalid) {
-  //     this.showMessage = true;
-  //     this.responseMessage = 'Please fill all the required fields correctly.';
-  //     return;
-  //   }
 
-  //   // Call the service to register the user
+    //   if (this.itemForm.invalid) {
+    //     this.showMessage = true;
+    //     this.responseMessage = 'Please fill all the required fields correctly.';
+    //     return;
+    //   }
+
+    //   // Call the service to register the user
     this.bookService.registerUser(this.itemForm.value).subscribe(
       (response: any) => {
         this.showMessage = true;
         this.responseMessage = response.message || 'Registration successful.';
       },
       (error: any) => {
+<<<<<<< HEAD
         this.showMessage = true;
+=======
+        this.showError = true;
+>>>>>>> mani
         this.responseMessage = 'An error occurred while registering.';
       }
     );
-  
-  console.log(this.itemForm.value);
-   }
+
+    console.log(this.itemForm.value);
+  }
 
 }
-

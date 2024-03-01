@@ -15,8 +15,10 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TeamComponent } from './team/team.component';
 // import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
+  { path:'homepage',component:HomepageComponent},
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'dashboard', component: DashbaordComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'team', component: TeamComponent },
   // {path:'status-techinican',component:StatusTechinicanComponent} , 
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'team', component: TeamComponent },  
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
 
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];

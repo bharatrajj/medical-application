@@ -1,6 +1,6 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-  <a class="navbar-brand" href="#">Medical E&T System</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-2">
+  <a class="navbar-brand" href="#"><b>MediService</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -18,11 +18,8 @@
  
       </li>
       <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/status-techinican']">Status of Techinican</a>
-      </li> -->
-      <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/team']">About Us</a>
-      </li>
+      </li> -->
      
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'TECHNICIAN'" [routerLink]="['/maintenance']">Maintenance Report</a>
@@ -31,21 +28,25 @@
         <a class="nav-link" *ngIf="roleName === 'SUPPLIER'" [routerLink]="['/orders']">Order Requests</a>
       </li>
     </ul>
- 
-    
     <ul class="navbar-nav">
-      <li *ngIf="!IsLoggin" class="nav-item">
-        <a class="nav-link" [routerLink]="['/login']">Login</a>
+      <li *ngIf="!IsLoggin" >
+        <a class="nav-link" [routerLink]="['/team']">About us</a>
       </li>
-      <li *ngIf="IsLoggin" class="nav-item">
-        <a class="nav-link" (click)="logout()" [routerLink]="['/login']">Logout</a>
+      <li *ngIf="!IsLoggin" class="nav-items">
+        <a class="nav-link" class="btn btn-primary" [routerLink]="['/login']">Login</a>
+      </li>
+      <li *ngIf="!IsLoggin" class="nav-itemx">
+        <a class="nav-link" class="btn btn-primary" [routerLink]="['/registration']">Register</a>
+      </li>
+      <li *ngIf="IsLoggin" class="nav-itemy">
+        <a class="nav-link" class="btn btn-danger" (click)="logout()" [routerLink]="['/homepage']">Logout</a>
       </li> 
     </ul>
   </div>
 </nav>
  
 <body  >
-  <div class="container mt-4 mx-5">
+  <div >
    
     <router-outlet>    
     </router-outlet>
