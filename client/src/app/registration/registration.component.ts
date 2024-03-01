@@ -18,11 +18,7 @@ export class RegistrationComponent {
   constructor(public router: Router, private bookService: HttpService, private formBuilder: FormBuilder) {
 
     this.itemForm = this.formBuilder.group({
-<<<<<<< HEAD
-      //complete this function 
-=======
       //complete this function
->>>>>>> mani
       username: [this.formModel.username, Validators.required],
       password: [this.formModel.password, Validators.required],
       email: [this.formModel.email, Validators.required],
@@ -49,11 +45,7 @@ export class RegistrationComponent {
         this.responseMessage = response.message || 'Registration successful.';
       },
       (error: any) => {
-<<<<<<< HEAD
-        this.showMessage = true;
-=======
         this.showError = true;
->>>>>>> mani
         this.responseMessage = 'An error occurred while registering.';
       }
     );

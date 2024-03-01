@@ -25,8 +25,6 @@ export class ScheduleMaintenanceComponent implements OnInit {
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
     {
       this.itemForm = this.formBuilder.group({
-        // scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
-        //completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
         scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
         completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
         description: [this.formModel.description,[ Validators.required]], 
@@ -79,7 +77,6 @@ export class ScheduleMaintenanceComponent implements OnInit {
 
   onSubmit()
   {
-    debugger;
     if(this.itemForm.valid)
     {
       if (this.itemForm.valid) {

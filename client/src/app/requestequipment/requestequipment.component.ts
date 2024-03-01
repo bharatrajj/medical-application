@@ -13,35 +13,32 @@ export class RequestequipmentComponent implements OnInit {
 
   itemForm: FormGroup;
 
-  formModel:any={status:null};
-  showError:boolean=false;
-  errorMessage:any;
-  hospitalList:any=[];
-  assignModel: any={};
-  orderList:any=[];
+  formModel: any = { status: null };
+  showError: boolean = false;
+  errorMessage: any;
+  hospitalList: any = [];
+  assignModel: any = {};
+  orderList: any = [];
   showMessage: any;
   responseMessage: any;
-  equipmentList: any=[];
-  constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
-    {
-      this.itemForm = this.formBuilder.group({
-        orderDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],  
-        quantity: [this.formModel.description,[ Validators.required]], 
-        status: [this.formModel.status,[ Validators.required]], 
-        equipmentId: [this.formModel.equipmentId,[ Validators.required]], 
-        hospitalId: [this.formModel.equipmentId,[ Validators.required]],
+  equipmentList: any = [];
+  constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
+    this.itemForm = this.formBuilder.group({
+      orderDate: [this.formModel.scheduledDate, [Validators.required, this.dateValidator]],
+      quantity: [this.formModel.description, [Validators.required]],
+      status: [this.formModel.status, [Validators.required]],
+      equipmentId: [this.formModel.equipmentId, [Validators.required]],
+      hospitalId: [this.formModel.equipmentId, [Validators.required]],
     });
-
-
-
-}  ngOnInit(): void {
-  this.getHospital();
-  this.getOrders();
+  }
+  ngOnInit(): void {
+    this.getHospital();
+    this.getOrders();
   }
   getHospital() {
-    this.hospitalList=[];
+    this.hospitalList = [];
     this.httpService.getHospital().subscribe((data: any) => {
-      this.hospitalList=data;
+      this.hospitalList = data;
       console.log(this.hospitalList);
     }, error => {
       // Handle error
@@ -52,28 +49,25 @@ export class RequestequipmentComponent implements OnInit {
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    const selectedDate=new Date(control.value)
-    const currentDate=new Date()
+    const selectedDate = new Date(control.value)
+    const currentDate = new Date()
 
-    if (!datePattern.test(control.value)|| selectedDate>currentDate) {
+    if (!datePattern.test(control.value) || selectedDate < currentDate) {
       return { invalidDate: true };
     }
 
     return null;
   }
-  onSubmit()
-  {
-    debugger;
-    if(this.itemForm.valid)
-    {
+  onSubmit() {
+    if (this.itemForm.valid) {
       if (this.itemForm.valid) {
         this.showError = false;
-      
-        this.httpService.orderEquipment(this.itemForm.value,this.itemForm.value.equipmentId).subscribe((data: any) => {
+
+        this.httpService.orderEquipment(this.itemForm.value, this.itemForm.value.equipmentId).subscribe((data: any) => {
           this.itemForm.reset();
-          this.showMessage=true;
-          this.responseMessage='Save Successfully';
-          
+          this.showMessage = true;
+          this.responseMessage = 'Save Successfully';
+          this.getOrders();
         }, error => {
           // Handle error
           this.showError = true;
@@ -84,15 +78,16 @@ export class RequestequipmentComponent implements OnInit {
         this.itemForm.markAllAsTouched();
       }
     }
-    else{
+    else {
       this.itemForm.markAllAsTouched();
     }
+
   }
   onHospitalSelect($event: any) {
-    let id= $event.target.value
-    this.equipmentList=[];
+    let id = $event.target.value
+    this.equipmentList = [];
     this.httpService.getEquipmentById(id).subscribe((data: any) => {
-      this.equipmentList=data;
+      this.equipmentList = data;
       console.log(this.equipmentList);
     }, error => {
       // Handle error
@@ -100,28 +95,28 @@ export class RequestequipmentComponent implements OnInit {
       this.errorMessage = "An error occurred while logging in. Please try again later.";
       console.error('Login error:', error);
     });;
-   
- }
 
- getOrders() {
-  this.orderList=[];
-  this.httpService.getorders().subscribe((data: any) => {
-    this.orderList=data;
-   console.log(data)
-  }, error => {
-    // Handle error
-    this.showError = true;
-    this.errorMessage = "An error occurred while logging in. Please try again later.";
-    console.error('Login error:', error);
-  });;
-}
-getStatusStyle(status: string) {
-  if (status === 'Completed') {
-    return {'color': 'green', 'font-weight': 'bold'};
-  } else if (status === 'In-Process') {
-    return {'color': '#FFC300 ', 'font-weight': 'bold'};
-  } else {
-    return {'color':'#3371FF','font-weight':'bold'}; // or any default style you want
   }
-}
+
+  getOrders() {
+    this.orderList = [];
+    this.httpService.getorders().subscribe((data: any) => {
+      this.orderList = data;
+      console.log(data)
+    }, error => {
+      // Handle error
+      this.showError = true;
+      this.errorMessage = "An error occurred while logging in. Please try again later.";
+      console.error('Login error:', error);
+    });;
+  }
+  getStatusStyle(status: string) {
+    if (status === 'Delivered') {
+      return { 'color': 'green', 'font-weight': 'bold' };
+    } else if (status === 'In-Process') {
+      return { 'color': '#FFC300 ', 'font-weight': 'bold' };
+    } else {
+      return { 'color': '#3371FF', 'font-weight': 'bold' };
+    }
+  }
 }
