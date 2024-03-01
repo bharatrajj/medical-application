@@ -38,6 +38,7 @@ export class ScheduleMaintenanceComponent implements OnInit {
 
 }  ngOnInit(): void {
   this.getHospital();
+  this.getMaintenance();
 
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
@@ -114,5 +115,28 @@ export class ScheduleMaintenanceComponent implements OnInit {
    });
   
 }
+ShowError:any=false;
+  maintenanceList: any=[];   
+  getMaintenance() {
+    this.maintenanceList=[];
+    this.httpService.getMaintenance().subscribe((data: any) => {
+      this.maintenanceList=data;
+     console.log(data)
+    }, error => {
+      // Handle error
+      this.ShowError = true;
+      this.errorMessage = "An error has Occured.Try again";
+      console.error('Login error:', error);
+    });;
+  }
+  getStatusStyle(status: string) {
+    if (status === 'Completed') {
+      return {'color': 'green', 'font-weight': 'bold'};
+    } else if (status === 'In-Process') {
+      return {'color': '#FFC300 ', 'font-weight': 'bold'};
+    } else {
+      return {'color':'#3371FF','font-weight':'bold'}; // or any default style you want
+    }
+  } 
 
 }

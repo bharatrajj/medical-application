@@ -14,7 +14,7 @@ import { RequestequipmentComponent } from './requestequipment/requestequipment.c
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TeamComponent } from './team/team.component';
-import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
+// import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'maintenance', component: MaintenanceComponent },  
   { path: 'orders', component: OrdersComponent },
   { path: 'team', component: TeamComponent },
-  {path:'status-techinican',component:StatusTechinicanComponent} , 
+  // {path:'status-techinican',component:StatusTechinicanComponent} , 
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },

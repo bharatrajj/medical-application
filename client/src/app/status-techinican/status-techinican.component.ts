@@ -9,10 +9,11 @@ import { HttpService } from '../../services/http.service';
 export class StatusTechinicanComponent implements OnInit {
 
   constructor(private httpService:HttpService) { }
-
+  ShowError:any=false;
   maintenanceList: any=[];
+  errorMessage:any;
   ngOnInit(): void {
-    this.getMaintenance();
+    this.getMaintenance()
   }
    
   getMaintenance() {
@@ -20,6 +21,11 @@ export class StatusTechinicanComponent implements OnInit {
     this.httpService.getMaintenance().subscribe((data: any) => {
       this.maintenanceList=data;
      console.log(data)
-    });
+    }, error => {
+      // Handle error
+      this.ShowError = true;
+      this.errorMessage = "An error has Occured.Try again";
+      console.error('Login error:', error);
+    });;
   }
 }

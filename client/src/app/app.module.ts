@@ -21,7 +21,7 @@ import { RequestequipmentComponent } from './requestequipment/requestequipment.c
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TeamComponent } from './team/team.component';
-import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
+// import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { StatusTechinicanComponent } from './status-techinican/status-techinican
       MaintenanceComponent,
       OrdersComponent,
       TeamComponent,
-      StatusTechinicanComponent
+      // StatusTechinicanComponent
   ],
   imports: [
     BrowserModule,

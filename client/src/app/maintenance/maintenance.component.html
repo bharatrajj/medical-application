@@ -62,7 +62,7 @@
         </div>
         <div class="modal-body">
             <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="update()">
-                <div class="mb-3">
+                <!-- <div class="mb-3">
   
                     <label for="content" class="form-label ">Scheduled Date</label>
                     <input type="hidden" name="maintenanceId" id="maintenanceId" formControlName="maintenanceId" >
@@ -70,7 +70,7 @@
                     <div *ngIf="itemForm.controls['scheduledDate'].invalid && (itemForm.controls['scheduledDate'].dirty || itemForm.controls['scheduledDate'].touched)" class="ng-dirty">
                         <span *ngIf="itemForm.controls['scheduledDate'].errors" class="text-danger">Please Enter Scheduled Date.</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="completedDate" class="form-label ">Completed Date</label>
                     <input type="date" name="completedDate"  formControlName="completedDate" class="form-control" id="completedDate" placeholder="Completed Date">
@@ -90,7 +90,7 @@
                     <select class="form-control" name="status" id="status" formControlName="status">
                         <option value="null">Choose Status</option>
                         <option value="In-Process">In-Process</option>
-                        <option value="Complete">Complete</option>
+                        <option value="Completed">Completed</option>
                     </select>
                     <div *ngIf="itemForm.controls['status'].invalid && (itemForm.controls['status'].dirty || itemForm.controls['status'].touched)" class="ng-dirty">
                         <span *ngIf="itemForm.controls['status'].errors" class="text-danger">Please choose status.</span>
