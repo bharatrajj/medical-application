@@ -21,9 +21,12 @@ public class Configurations {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedOrigins("*")
+                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedOrigins("*") 
                         .allowedHeaders("*");
             }
         };
     }
 }
+
+
+//* in allowed origin can give access of backend  to anyone  */

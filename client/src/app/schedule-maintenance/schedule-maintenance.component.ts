@@ -25,8 +25,10 @@ export class ScheduleMaintenanceComponent implements OnInit {
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
     {
       this.itemForm = this.formBuilder.group({
-        scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
+        // scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
         //completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],
+        scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
+        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
         description: [this.formModel.description,[ Validators.required]], 
         status: [this.formModel.status,[ Validators.required]], 
         equipmentId: [this.formModel.equipmentId,[ Validators.required]], 
@@ -38,17 +40,28 @@ export class ScheduleMaintenanceComponent implements OnInit {
 
 }  ngOnInit(): void {
   this.getHospital();
+  this.getMaintenance();
 
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    const currentDate = new Date();
-    const selectedDate = new Date(control.value);
-    if (!datePattern.test(control.value)||selectedDate>currentDate) {
+  
+    if (!datePattern.test(control.value)) {
       return { invalidDate: true };
     }
     return null;
   }
+
+  dateValidator2(control: AbstractControl): ValidationErrors | null {
+
+    const currentDate = new Date();
+    const selectedDate = new Date(control.value);
+    if (selectedDate<currentDate) {
+      return { invalidDate: true };
+    }
+    return null;
+  }
+  
   
     
   
@@ -104,5 +117,28 @@ export class ScheduleMaintenanceComponent implements OnInit {
    });
   
 }
+ShowError:any=false;
+  maintenanceList: any=[];   
+  getMaintenance() {
+    this.maintenanceList=[];
+    this.httpService.getMaintenance().subscribe((data: any) => {
+      this.maintenanceList=data;
+     console.log(data)
+    }, error => {
+      // Handle error
+      this.ShowError = true;
+      this.errorMessage = "An error has Occured.Try again";
+      console.error('Login error:', error);
+    });;
+  }
+  getStatusStyle(status: string) {
+    if (status === 'Completed') {
+      return {'color': 'green', 'font-weight': 'bold'};
+    } else if (status === 'In-Process') {
+      return {'color': '#FFC300 ', 'font-weight': 'bold'};
+    } else {
+      return {'color':'#3371FF','font-weight':'bold'}; // or any default style you want
+    }
+  } 
 
 }

@@ -19,9 +19,9 @@ export class RegistrationComponent {
 
     this.itemForm = this.formBuilder.group({
       //complete this function 
-      username: [this.formModel.username, Validators.required,Validators.minLength(5),Validators.maxLength(10)],
-      password: [this.formModel.password, Validators.required,Validators.minLength(5),Validators.maxLength(10)],
-      email: [this.formModel.email, Validators.required,Validators.email],
+      username: [this.formModel.username, Validators.required],
+      password: [this.formModel.password, Validators.required],
+      email: [this.formModel.email, Validators.required],
       role: [this.formModel.role, Validators.required]
 
     });
@@ -42,14 +42,10 @@ export class RegistrationComponent {
     this.bookService.registerUser(this.itemForm.value).subscribe(
       (response: any) => {
         this.showMessage = true;
-        if(response==null){
-          this.showMessage=false;
-          this.responseMessage="Try with another username or role";
-        }
         this.responseMessage = response.message || 'Registration successful.';
       },
       (error: any) => {
-        this.showMessage = false;
+        this.showMessage = true;
         this.responseMessage = 'An error occurred while registering.';
       }
     );

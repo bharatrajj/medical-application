@@ -51,7 +51,6 @@
                       <select class="form-control" name="status" id="status" formControlName="status">
                         <option value="null">Choose Status</option>
                         <option value="Initiated">Initiated</option>
-                        <option value="Complete">Complete</option>
                       </select>
                       <div *ngIf="itemForm.controls['status'].invalid && (itemForm.controls['status'].dirty || itemForm.controls['status'].touched)" class="ng-dirty">
                         <span *ngIf="itemForm.controls['status'].errors" class="text-danger">Please choose status.</span>
@@ -73,3 +72,46 @@
       </div>
   </div>
 </div>
+
+
+<div class="row mt-3">
+
+  <div class="card">
+    <div class="card-header">Orders Information</div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Sr#</th>
+            <th>Order Date</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Equipment</th>
+            <th>Hospital</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let val of orderList">
+          <tr>
+            <td>{{val.id}}</td>
+            <td>{{val.orderDate | date: 'dd-MMM-yyyy'}}</td>
+            <td>{{val.quantity}}</td>
+            <td [ngStyle]="getStatusStyle(val.status)">{{val.status}}</td>
+            <td>
+              <p>Id:{{val.equipment.id}}</p>
+              <p>Name:{{val.equipment.name}}</p>
+              <p>Description:{{val.equipment.description}}</p>
+            </td>
+            <td>
+              <p>Id:{{val.equipment.hospital.id}}</p>
+              <p>Name:{{val.equipment.hospital.name}}</p>
+              <p>Location:{{val.equipment.hospital.location}}</p>
+            </td>
+          
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>

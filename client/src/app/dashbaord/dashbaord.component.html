@@ -1,3 +1,11 @@
 <div class="row text-center">
-<h1 class="text-capitalize">Medical Equipment & Tracking System</h1>
+ <div *ngIf="roleType=='HOSPITAL'">
+    <h1>Welcome Admin </h1>
+</div>
+ <div *ngIf="roleType=='SUPPLIER'">
+    <h1>Welcome  Supplier</h1>
+</div>
+<div *ngIf="roleType=='TECHNICIAN'">
+    <h1>Welcome TECHINICAN</h1>
+</div>
 </div>

@@ -23,6 +23,7 @@ export class CreatehospitalComponent implements OnInit {
   showMessage: any;
   responseMessage: any;
   constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
+    // storing the input in the form using formGroup
     this.itemForm = this.formBuilder.group({
       name: [this.formModel.name, [Validators.required]],
       location: [this.formModel.location, [Validators.required]],
@@ -35,6 +36,8 @@ export class CreatehospitalComponent implements OnInit {
       hospitalId: [this.formModel.hospitalId, [Validators.required]],
 
     });
+
+
   }
   ngOnInit(): void {
 
@@ -61,7 +64,7 @@ export class CreatehospitalComponent implements OnInit {
         this.httpService.createHospital(this.itemForm.value).subscribe((data: any) => {
           this.itemForm.reset();
           this.getHospital();
-        
+
 
         }, error => {
           // Handle error
@@ -78,26 +81,25 @@ export class CreatehospitalComponent implements OnInit {
     }
   }
   Addequipment(value: any) {
-
-    debugger;
     this.equipmentForm.controls['hospitalId'].setValue(value.id);
+    this.showMessage = false;
   }
   submitEquipment() {
+
     if (this.equipmentForm.value) {
-      
-      this.showMessage = false;
+
       this.httpService.addEquipment(this.equipmentForm.value, this.equipmentForm.controls['hospitalId'].value).subscribe((data: any) => {
         this.showMessage = true;
         this.responseMessage = `Equipment added successfully`;
-        
         this.equipmentForm.reset()
-        
+
       }, error => {
         // Handle error
         this.showError = true;
         this.errorMessage = "An error occurred while logging in. Please try again later.";
         console.error('Login error:', error);
       });;
+
     }
     else {
       this.equipmentForm.markAllAsTouched();

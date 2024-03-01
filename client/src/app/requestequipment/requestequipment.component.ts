@@ -18,7 +18,7 @@ export class RequestequipmentComponent implements OnInit {
   errorMessage:any;
   hospitalList:any=[];
   assignModel: any={};
-
+  orderList:any=[];
   showMessage: any;
   responseMessage: any;
   equipmentList: any=[];
@@ -36,6 +36,7 @@ export class RequestequipmentComponent implements OnInit {
 
 }  ngOnInit(): void {
   this.getHospital();
+  this.getOrders();
   }
   getHospital() {
     this.hospitalList=[];
@@ -101,4 +102,26 @@ export class RequestequipmentComponent implements OnInit {
     });;
    
  }
+
+ getOrders() {
+  this.orderList=[];
+  this.httpService.getorders().subscribe((data: any) => {
+    this.orderList=data;
+   console.log(data)
+  }, error => {
+    // Handle error
+    this.showError = true;
+    this.errorMessage = "An error occurred while logging in. Please try again later.";
+    console.error('Login error:', error);
+  });;
+}
+getStatusStyle(status: string) {
+  if (status === 'Completed') {
+    return {'color': 'green', 'font-weight': 'bold'};
+  } else if (status === 'In-Process') {
+    return {'color': '#FFC300 ', 'font-weight': 'bold'};
+  } else {
+    return {'color':'#3371FF','font-weight':'bold'}; // or any default style you want
+  }
+}
 }

@@ -6,7 +6,7 @@
 <div class="row mt-3">
 
   <div class="card">
-    <div class="card-header">Order Information</div>
+    <div class="card-header">Orders Information</div>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -40,7 +40,7 @@
             </td>
             <td>
               <button data-bs-toggle="modal" (click)="edit(val)" data-bs-target="#driverModal"
-                class="btn btn-warning">Update Status</button>
+                class="btn btn-warning" [disabled]="statusModel.newStatus=='Completed'">Update Status</button>
             </td>
             <br>
 
@@ -66,11 +66,16 @@
         
         <select [(ngModel)]="statusModel.newStatus" class="form-control" name="" id="Fstatus">
           <option value="null">Choose Status</option>
+<<<<<<< HEAD
           <option value="In Transit">In Transit</option>
           <option value="Delivered">Delivered</option>
+=======
+          <option value="In-Process">In-Process</option>
+          <option value="Completed">Completed</option>
+>>>>>>> Jigar
         </select>
 
-        <div *ngIf="showMessage" class="alert alert-success mt-4" role="alert">
+        <div *ngIf="showMessage" class="alert alert-success mt-4" role="alert" >
           {{responseMessage}}
         </div>
         <div *ngIf="showError" class="alert alert-danger" role="alert">
@@ -78,9 +83,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        
-        <button type="button" class="btn btn-primary" (click)="update()">Save</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="update()">Save</button>
       </div>
     </div>
   </div>
