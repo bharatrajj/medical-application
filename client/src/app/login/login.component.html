@@ -1,14 +1,37 @@
-<div class="vh-100 d-flex justify-content-center align-items-center">
-  <div class="container">
-    <div class="row d-flex justify-content-center">
-      <div class="col-12 col-md-8 col-lg-6">
-        <div class="border border-3 border-primary"></div>
-        <div class="card bg-white">
-          <div class="card-body p-5">
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+  <style>
+    .background-radial-gradient {
+      background-color: hsl(240, 33%, 1%);
+    }
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+  </style>
+
+  <div class="container px-1 py-1 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+          <b>MediService</b><br/>
+          <h3><span style="color: hsl(218, 81%, 75%)">Your Health Our Priority</span></h3>
+        </h1>
+        
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
             <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="onLogin()">
-              <h2 class="fw-bold mb-2 text-uppercase ">Medi-Service Application</h2>
-              <p class=" mb-5">Please enter your user and password!</p>
-              <div class="mb-3">
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                  <h5> Please Enter Your Details Here</h5>
+                <div class="col-md-6 mb-4">
+                  
+                </div>
+              </div>
+              <div class="form-outline mb-3">
                 <label for="username" class="form-label ">Username</label>
                 <!-- //create input with formControlName username -->
                 <input type="text" name="username" formControlName="username">
@@ -17,9 +40,9 @@
                   class="ng-dirty">
                   <span class="text-danger">Username Invalid.</span>
                 </div>
-              </div>
-
-              <div class="mb-3">
+                </div>  
+              <!-- Password input -->
+              <div class="form-outline mb-5">
                 <label for="password" class="form-label ">Password</label>
                 <input type="password" name="password" formControlName="password">
                 <div
@@ -27,13 +50,11 @@
                   class="ng-dirty">
                   <span class="text-danger">Password Invalid.</span>
                 </div>
-                <!-- //create input with formControlName password -->
-
               </div>
-
-              <div class="d-grid">
-                <button class="btn btn-outline-dark" type="submit">Login</button>
-              </div>
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Log In
+              </button>
+              <!-- Register buttons -->
             </form>
             <div>
               <p class="mb-0  text-center">Don't have an account? <a (click)="registration()"
@@ -47,4 +68,5 @@
       </div>
     </div>
   </div>
-</div>
+</section>
+<!-- Section: Design Block -->

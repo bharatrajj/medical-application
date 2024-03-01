@@ -13,15 +13,15 @@ export class RegistrationComponent {
   itemForm: FormGroup;
   formModel: any = { role: null, email: '', password: '', username: '' };
   showMessage: boolean = false;
-
+  showError:boolean=false;
   responseMessage: any;
   constructor(public router: Router, private bookService: HttpService, private formBuilder: FormBuilder) {
 
     this.itemForm = this.formBuilder.group({
-      //complete this function 
-      username: [this.formModel.username, Validators.required,Validators.minLength(5),Validators.maxLength(10)],
-      password: [this.formModel.password, Validators.required,Validators.minLength(5),Validators.maxLength(10)],
-      email: [this.formModel.email, Validators.required,Validators.email],
+      //complete this function
+      username: [this.formModel.username, Validators.required],
+      password: [this.formModel.password, Validators.required],
+      email: [this.formModel.email, Validators.required],
       role: [this.formModel.role, Validators.required]
 
     });
@@ -31,31 +31,26 @@ export class RegistrationComponent {
   }
 
   onRegister() {
-    
-  //   if (this.itemForm.invalid) {
-  //     this.showMessage = true;
-  //     this.responseMessage = 'Please fill all the required fields correctly.';
-  //     return;
-  //   }
 
-  //   // Call the service to register the user
+    //   if (this.itemForm.invalid) {
+    //     this.showMessage = true;
+    //     this.responseMessage = 'Please fill all the required fields correctly.';
+    //     return;
+    //   }
+
+    //   // Call the service to register the user
     this.bookService.registerUser(this.itemForm.value).subscribe(
       (response: any) => {
         this.showMessage = true;
-        if(response==null){
-          this.showMessage=false;
-          this.responseMessage="Try with another username or role";
-        }
         this.responseMessage = response.message || 'Registration successful.';
       },
       (error: any) => {
-        this.showMessage = false;
+        this.showError = true;
         this.responseMessage = 'An error occurred while registering.';
       }
     );
-  
-  console.log(this.itemForm.value);
-   }
+
+    console.log(this.itemForm.value);
+  }
 
 }
-

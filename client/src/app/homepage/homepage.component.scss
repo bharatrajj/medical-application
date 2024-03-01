@@ -1,0 +1,76 @@
+.navbar {
+  display: flex;
+  background-color:white;
+}
+ 
+a, button {
+  font-size: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+ 
+a {
+  text-decoration: none;
+  color:black;
+}
+ 
+a:hover {
+  background-color: #00268A;
+  color: white;
+  border-radius: 10px;
+}
+ 
+.btn {
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color:green;
+  color: white;
+  border: none;
+  
+}
+ 
+.logo {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+ 
+.right {
+  position: absolute;
+  top: 30px;
+  right: 200px;
+  
+}
+ 
+.main {
+  display:block;
+  background-image: url('../../assets/3.jpg');
+  // background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaX_WXw-7PqSigD-ALyoB9AYtjyUa-RuxSJw&usqp=CAU");
+  width: auto;
+  background-repeat: no-repeat;
+  
+}
+ 
+.img {
+  position: relative;
+  left: 600px;
+  background-repeat: no-repeat;
+}
+ 
+.quote {
+  font-size: 60px;
+}
+ 
+h1,h2,p {
+  font-size: 25px;
+  color:white;
+}
+ 
+.text {
+  position: relative;
+  left: 50px;
+  color:white;
+}
+
+
+
