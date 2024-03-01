@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-5">
             <div class="mb-3">
-              <label for="content" class="form-label ">Name</label>
+              <label for="content" class="form-label ">Hospital Name</label>
               <input type="content" name="name" formControlName="name" [ngModel]="formModel.name" class="form-control"
                 id="name" placeholder="name">
               <div
@@ -102,14 +102,13 @@
             <div class="col-md-12">
               <div class="mb-3">
                 <input type="hidden" name="hospitalId" id="hospitalId" formControlName="hospitalId">
-                <label for="content" class="form-label ">Name</label>
+                <label for="content" class="form-label">Equipment</label>
                 <input type="content" name="name" formControlName="name" [ngModel]="formModel.name"
                   class="form-control" id="name" placeholder="name">
-                <div
-                  *ngIf="equipmentForm.controls['name'].invalid && (equipmentForm.controls['name'].dirty || equipmentForm.controls['name'].touched)"
+                <div *ngIf="equipmentForm.get('name')?.invalid && (equipmentForm.get('name')?.dirty || equipmentForm.get('name')?.touched)"
                   class="ng-dirty">
-                  <span *ngIf="equipmentForm.controls['name'].errors">
-                    <span class="text-danger">Please Enter name .</span>
+                  <span *ngIf="equipmentForm.get('name')?.errors">
+                    <span class="text-danger">Please Enter Equipment Name .</span>
                   </span>
                 </div>
               </div>
@@ -117,7 +116,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="mb-3">
-                  <label for="description" class="form-label ">Description</label>
+                  <label for="description" class="form-label" required>Description</label>
                   <input type="text" name="description" formControlName="description"
                     [ngModel]="formModel.description" class="form-control" id="description" placeholder="description">
                   <div
@@ -137,7 +136,7 @@
             {{responseMessage}}
           </div>
           <div *ngIf="showError" class="alert alert-danger" role="alert">
-            {{errorMessage}}
+            <p>An error occurred while adding equipment. Please try again later.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

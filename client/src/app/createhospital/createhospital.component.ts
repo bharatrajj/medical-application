@@ -85,21 +85,24 @@ export class CreatehospitalComponent implements OnInit {
     this.showMessage = false;
   }
   submitEquipment() {
+    if (this.equipmentForm.valid) {
+      if (this.equipmentForm.valid) {
+        //this.showError = false;
+        this.httpService.addEquipment(this.equipmentForm.value,this.equipmentForm.controls['hospitalId'].value).subscribe((data: any) => {
+          this.showMessage=true
+          this.responseMessage=`Equipment Added Successfully`
+          this.equipmentForm.reset()
 
-    if (this.equipmentForm.value) {
 
-      this.httpService.addEquipment(this.equipmentForm.value, this.equipmentForm.controls['hospitalId'].value).subscribe((data: any) => {
-        this.showMessage = true;
-        this.responseMessage = `Equipment added successfully`;
-        this.equipmentForm.reset()
-
-      }, error => {
-        // Handle error
-        this.showError = true;
-        this.errorMessage = "An error occurred while logging in. Please try again later.";
-        console.error('Login error:', error);
-      });;
-
+        }, error => {
+          // Handle error
+          this.showError = true;
+          this.errorMessage = "An error occurred while adding equipment. Please try again later.";
+          console.error('Login error:', error);
+        });;
+      } else {
+        this.equipmentForm.markAllAsTouched();
+      }
     }
     else {
       this.equipmentForm.markAllAsTouched();
