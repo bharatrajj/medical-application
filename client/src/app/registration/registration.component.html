@@ -44,11 +44,13 @@
                 <div class="form-outline mb-3">
                   <label for="email" class="form-label ">Email address</label>
                 <!-- //create input with  formControlName="email" -->
-                <input type="email" name="email" formControlName="email" [ngModel]="formModel.email">
-                <div
-                  *ngIf="itemForm.get('email')?.invalid && (itemForm.get('email')?.dirty || itemForm.get('email')?.touched)"
-                  class="ng-dirty">
-                  <span class="text-danger">Please Enter Email Id.</span>
+                <input type="email" id="email" name="email" formControlName="email" [(ngModel)]="formModel.email">
+                <div *ngIf="itemForm.get('email')?.invalid && (itemForm.get('email')?.touched || itemForm.get('email')?.dirty)">
+                  <div *ngIf="itemForm.get('email')?.hasError('required')">Email is required</div>
+                  <div *ngIf="itemForm.get('email')?.hasError('email')">
+                    <span>Enter valid email ID</span>
+                  </div>
+                  
                 </div>
                 </div> 
               <!-- Password input -->

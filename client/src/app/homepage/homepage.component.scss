@@ -45,7 +45,7 @@ a:hover {
 .main {
   display:flex;
   // background-image: url('../../assets/3.jpg');
-  background-color: white;
+  background-color:black;
   width: auto;
   background-repeat: no-repeat;
   
@@ -66,12 +66,15 @@ a:hover {
  
 h1,h2,p {
   font-size: 25px;
-  color:black;
+  color:white;
 }
  
 .text {
   position: relative;
   left: 50px;
+  color:white;
+}
+h3{
   color:white;
 }
 

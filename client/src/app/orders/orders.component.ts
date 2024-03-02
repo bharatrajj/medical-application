@@ -30,8 +30,8 @@ export class OrdersComponent implements OnInit {
     }, error => {
       // Handle error
       this.showError = true;
-      this.errorMessage = "An error occurred while logging in. Please try again later.";
-      console.error('Login error:', error);
+      this.errorMessage = "An error occurred while fetching list. Please try again later.";
+      //console.error('Error:', error);
     });;
   }
 
@@ -51,8 +51,8 @@ export class OrdersComponent implements OnInit {
       }, error => {
         // Handle error
         this.showError = true;
-        this.errorMessage = "An error occurred while logging in. Please try again later.";
-        console.error('Login error:', error);
+        this.errorMessage = "An error occurred while updating status. Please try again later.";
+        
       });
 
     }

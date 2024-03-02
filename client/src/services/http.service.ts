@@ -91,7 +91,7 @@ export class HttpService {
     return this.http.put(this.serverName+'/api/technician/maintenance/update/'+maintenanceId,details,this.getRequestOptions());
   }
   orderEquipment(details:any,equipmentId:any):Observable<any> {
- 
+
     // const authToken = this.authService.getToken();
     // let headers = new HttpHeaders();
     // headers = headers.set('Content-Type', 'application/json');

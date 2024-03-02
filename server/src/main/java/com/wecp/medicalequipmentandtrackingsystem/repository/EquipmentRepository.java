@@ -9,7 +9,7 @@ import java.util.List;
  
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment,Long>{
-    // extent jpa repository and add custom methods if needed
-    public List<Equipment> findByHospitalId(Long HospitalId);
+    // gets all equipments of particular hospital
+     List<Equipment> findByHospitalId(Long HospitalId);
  
 }

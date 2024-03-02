@@ -2,7 +2,7 @@ package com.wecp.medicalequipmentandtrackingsystem.service;
  
  
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.Equipment;
-import com.wecp.medicalequipmentandtrackingsystem.entitiy.Orders;
+import com.wecp.medicalequipmentandtrackingsystem.entitiy.Order;
 import com.wecp.medicalequipmentandtrackingsystem.repository.EquipmentRepository;
 import com.wecp.medicalequipmentandtrackingsystem.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class OrderService {
     @Autowired
     private EquipmentRepository equipmentRepository;
  
-    public Orders placeOrder(Long equipmentId, Orders order) {
+    public Order placeOrder(Long equipmentId, Order order) {
         // Check if the equipment with the given ID exists
         Equipment equipment = equipmentRepository.findById(equipmentId)
                 .orElseThrow(() -> new EntityNotFoundException("Equipment not found with ID: " + equipmentId));
@@ -33,13 +33,13 @@ public class OrderService {
         return orderRepository.save(order);
     }
  
-    public List<Orders> getAllOrders() {
+    public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
  
-    public Orders updateOrderStatus(Long orderId, String newStatus) {
+    public Order updateOrderStatus(Long orderId, String newStatus) {
         // Check if the order with the given ID exists
-        Orders existingOrder = orderRepository.findById(orderId)
+        Order existingOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order not found with ID: " + orderId));
  
         // Update the order status

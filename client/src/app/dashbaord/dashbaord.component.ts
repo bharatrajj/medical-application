@@ -13,5 +13,6 @@ export class DashbaordComponent implements OnInit{
    }
   ngOnInit(): void {
        this.roleType=this.authService.getRole;
+       
   }
 }

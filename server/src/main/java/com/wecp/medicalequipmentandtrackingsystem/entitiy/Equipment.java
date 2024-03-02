@@ -17,8 +17,8 @@ public class Equipment {
     private String name;
     private String description;
  
-    @ManyToOne
-    @JoinColumn(name="hospital_id")
+    @ManyToOne //many equipments can be present in single hospital.
+    @JoinColumn(name="hospital_id") 
     private Hospital hospital;
  
     public Long getId() {
