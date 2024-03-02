@@ -23,6 +23,9 @@ export class RequestequipmentComponent implements OnInit {
   responseMessage: any;
   equipmentList: any = [];
   constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
+    if(authService.getRole != 'Hospital'){
+      this.router.navigateByUrl('dashboard');
+    }
     this.itemForm = this.formBuilder.group({
       orderDate: [this.formModel.scheduledDate, [Validators.required, this.dateValidator]],
       quantity: [this.formModel.description, [Validators.required]],

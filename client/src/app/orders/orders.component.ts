@@ -16,7 +16,10 @@ export class OrdersComponent implements OnInit {
   responseMessage: any;
   orderList: any = [];
   statusModel: any = { newStatus: null }
-  constructor(public router: Router, public httpService: HttpService) {
+  constructor(public router: Router, public httpService: HttpService, public authService:AuthService) {
+    if(authService.getRole != 'Hospital' && authService.getRole != 'Supplier'){
+      this.router.navigateByUrl('dashboard');
+    }
   }
   ngOnInit(): void {
     this.getOrders();

@@ -24,6 +24,9 @@ export class CreatehospitalComponent implements OnInit {
   responseMessage: any;
   constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
     // storing the input in the form using formGroup
+    if(authService.getRole != 'Hospital'){
+      this.router.navigateByUrl('dashboard')
+    }
     this.itemForm = this.formBuilder.group({
       name: [this.formModel.name, [Validators.required]],
       location: [this.formModel.location, [Validators.required]],

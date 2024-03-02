@@ -23,6 +23,9 @@ export class MaintenanceComponent implements OnInit {
   maintenanceObj: any={};
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
     {
+      if(authService.getRole != 'Hospital' && authService.getRole != 'Technician'){
+        this.router.navigateByUrl('dashboard');
+      }
       this.itemForm = this.formBuilder.group({
         scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator]],
         completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator]],

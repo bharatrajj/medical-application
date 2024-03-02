@@ -24,6 +24,10 @@ export class ScheduleMaintenanceComponent implements OnInit {
   equipmentList: any=[];
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
     {
+
+      if(authService.getRole != 'Hospital'){
+        this.router.navigateByUrl('dashboard');
+      }
       this.itemForm = this.formBuilder.group({
         scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
         completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
