@@ -1,6 +1,6 @@
 body {
   background: #fafafa url(https://jackrugile.com/images/misc/noise-diagonal.png);
-  color: #444;
+  color: #691717;
   font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
   text-shadow: 0 1px 0 #fff;
 }
@@ -70,7 +70,7 @@ td {
   transition: all 300ms;
 }
 .btn{
-  background-color: rgb(20, 28, 149);
+  background-color: rgb(5, 8, 45);
   color:white;
 }
 
@@ -104,7 +104,7 @@ tr:last-of-type td:last-child {
 } 
 
 tbody:hover td {
-  color: transparent;
+  color: black;
   text-shadow: 0 0 3px #aaa;
 }
 
@@ -112,3 +112,36 @@ tbody:hover tr:hover td {
   color: #444;
   text-shadow: 0 1px 0 #fff;
 }
+
+
+button {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 6px 6px 12px #c5c5c5,
+              -6px -6px 12px #ffffff;
+ }
+ 
+ button::before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+ }
+ 
+ button:hover::before {
+  width: 9em;
+ }

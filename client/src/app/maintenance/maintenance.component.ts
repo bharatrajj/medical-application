@@ -103,4 +103,13 @@ ngOnInit(): void {
       this.itemForm.markAllAsTouched();
     }
   }
+  getStatusStyle(status: string) {
+    if (status === 'Serviced') {
+      return { 'color': 'green', 'font-weight': 'bold', 'font-size':'20px' };
+    } else if (status === 'In Progress') {
+      return { 'color': '#FFC300 ', 'font-weight': 'bold', 'font-size':'20px' };
+    } else {
+      return { 'color': '#3371FF', 'font-weight': 'bold','font-size':'20px' };
+    }
+  }
 }

@@ -10,63 +10,62 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
+  showError: boolean = false;
+  errorMessage: any;
+  showMessage: any = false;
+  responseMessage: any;
+  orderList: any = [];
+  statusModel: any = { newStatus: null }
+  constructor(public router: Router, public httpService: HttpService) {
+  }
+  ngOnInit(): void {
+    this.getOrders();
+  }
 
-    formModel:any={status:null}
-   showError:boolean=false;
-   errorMessage:any;
-
-   showMessage: any=false;
-   responseMessage: any;
-   orderList: any=[];
-
-   statusModel:any={newStatus:null}
-   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
-  {
-    //remove the formbuilder and authservice
-  }  
- ngOnInit(): void {
-   this.getOrders();
-   }  
- 
-   getOrders() {
-     this.orderList=[];
-     this.httpService.getorders().subscribe((data: any) => {
-       this.orderList=data;
+  getOrders() {
+    this.orderList = [];
+    this.httpService.getorders().subscribe((data: any) => {
+      this.orderList = data;
       console.log(data)
-     }, error => {
-       // Handle error
-       this.showError = true;
-       this.errorMessage = "An error occurred while logging in. Please try again later.";
-       console.error('Login error:', error);
-     });;
-   }
-   
-   edit(value:any)
-   {
-    this.statusModel.cargoId=value.id
-    this.showMessage=false;
-   }
-  
-   update()
-   { 
-   
-    if(this.statusModel.newStatus!=null)
-    {   
-      this.httpService.UpdateOrderStatus(this.statusModel.newStatus,this.statusModel.cargoId).subscribe((data: any) => {
+    }, error => {
+      // Handle error
+      this.showError = true;
+      this.errorMessage = "An error occurred while logging in. Please try again later.";
+      console.error('Login error:', error);
+    });;
+  }
+
+  edit(value: any) {
+    this.statusModel.orderId = value.id
+    this.showMessage = false;
+  }
+
+  update() {
+
+    if (this.statusModel.newStatus != null) {
+      this.httpService.UpdateOrderStatus(this.statusModel.newStatus, this.statusModel.orderId).subscribe((data: any) => {
         this.showMessage = true;
-        this.responseMessage=`Status updated`;
+        this.responseMessage = `Status updated`;
         this.getOrders();
-        
+
       }, error => {
         // Handle error
         this.showError = true;
         this.errorMessage = "An error occurred while logging in. Please try again later.";
         console.error('Login error:', error);
       });
-      
+
     }
-   }
-   
- }
- 
- 
+  }
+  getStatusStyle(status: string) {
+    if (status === 'Delivered') {
+      return { 'color': 'green', 'font-weight': 'bold', 'font-size': '20px' };
+    } else if (status === 'In Transit') {
+      return { 'color': '#FFC300 ', 'font-weight': 'bold', 'font-size': '20px' };
+    } else {
+      return { 'color': '#3371FF', 'font-weight': 'bold', 'font-size': '20px' };
+    }
+  }
+
+}
+
