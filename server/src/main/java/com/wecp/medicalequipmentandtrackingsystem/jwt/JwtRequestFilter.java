@@ -1,6 +1,8 @@
 package com.wecp.medicalequipmentandtrackingsystem.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.SignatureException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+            FilterChain filterChain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
 
         String username = null;
@@ -42,8 +44,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             jwt = authorizationHeader.substring(7);
             try {
                 username = jwtUtil.extractUsername(jwt);
-            } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException |
-                     SignatureException | IllegalArgumentException e) {
+            } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException
+                    | IllegalArgumentException e) {
                 // Handle invalid tokens here if needed
             }
         }
@@ -53,8 +55,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             if (jwtUtil.validateToken(jwt, userDetails)) {
                 Claims claims = jwtUtil.extractAllClaims(jwt);
-                Collection<? extends GrantedAuthority> authorities =
-                        AuthorityUtils.createAuthorityList((String) claims.get("role"));
+                Collection<? extends GrantedAuthority> authorities = AuthorityUtils
+                        .createAuthorityList((String) claims.get("role"));
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, authorities);

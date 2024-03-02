@@ -48,10 +48,11 @@ public class SecurityConfig {
             .antMatchers(HttpMethod.GET,"/api/hospital/equipment").hasAuthority("HOSPITAL")
             .antMatchers(HttpMethod.GET,"/api/hospital/equipment/**").hasAuthority("HOSPITAL")
             .antMatchers(HttpMethod.GET,"/api/hospitals").hasAuthority("HOSPITAL")
-            .antMatchers(HttpMethod.GET,"/api/technician/maintenance").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/technician/maintenance").hasAnyAuthority("HOSPITAL","TECHNICIAN")
+            
             // .antMatchers(HttpMethod.GET,"/api/technician/maintenance").hasAuthority("TECHNICIAN")
             .antMatchers(HttpMethod.PUT,"/api/technician/maintenance/update/**").hasAuthority("TECHNICIAN")
-            .antMatchers(HttpMethod.GET,"/api/supplier/orders").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/supplier/orders").hasAnyAuthority("HOSPITAL","SUPPLIER")
             .antMatchers(HttpMethod.PUT,"/api/supplier/order/update/**").hasAuthority("SUPPLIER")
                 .antMatchers("/api/**").authenticated()
             .and()
