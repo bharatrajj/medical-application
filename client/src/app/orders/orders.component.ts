@@ -17,7 +17,7 @@ export class OrdersComponent implements OnInit {
   orderList: any = [];
   statusModel: any = { newStatus: null }
   constructor(public router: Router, public httpService: HttpService, public authService:AuthService) {
-    if(authService.getRole != 'Hospital' && authService.getRole != 'Supplier'){
+    if(authService.getRole != 'HOSPITAL' && authService.getRole != 'SUPPLIER'){
       this.router.navigateByUrl('dashboard');
     }
   }

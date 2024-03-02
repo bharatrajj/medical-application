@@ -13,41 +13,37 @@ import { AuthService } from '../../services/auth.service';
 export class ScheduleMaintenanceComponent implements OnInit {
   itemForm: FormGroup;
 
-  formModel:any={status:null};
-  showError:boolean=false;
-  errorMessage:any;
-  hospitalList:any=[];
-  assignModel: any={};
-  statusModel:any={}
+  formModel: any = { status: null };
+  showError: boolean = false;
+  errorMessage: any;
+  hospitalList: any = [];
+  assignModel: any = {};
+  statusModel: any = {}
   showMessage: any;
   responseMessage: any;
-  equipmentList: any=[];
-  constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
-    {
+  equipmentList: any = [];
+  isClick: boolean = false;
+  constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
+    this.itemForm = this.formBuilder.group({
+      scheduledDate: [this.formModel.scheduledDate, [Validators.required, this.dateValidator, this.dateValidator2]],
+      completedDate: [this.formModel.completedDate, [Validators.required, this.dateValidator, this.dateValidator2]],
+      description: [this.formModel.description, [Validators.required]],
+      status: [this.formModel.status, [Validators.required]],
+      equipmentId: [this.formModel.equipmentId, [Validators.required]],
+      hospitalId: [this.formModel.hospitalId, [Validators.required]],
 
-      if(authService.getRole != 'Hospital'){
-        this.router.navigateByUrl('dashboard');
-      }
-      this.itemForm = this.formBuilder.group({
-        scheduledDate: [this.formModel.scheduledDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
-        completedDate: [this.formModel.completedDate,[ Validators.required, this.dateValidator,this.dateValidator2]],
-        description: [this.formModel.description,[ Validators.required]], 
-        status: [this.formModel.status,[ Validators.required]], 
-        equipmentId: [this.formModel.equipmentId,[ Validators.required]], 
-        hospitalId: [this.formModel.hospitalId,[ Validators.required]], 
-       
     });
 
 
 
-}  ngOnInit(): void {
-  this.getHospital();
-  this.getMaintenance();
+  } ngOnInit(): void {
+    this.getHospital();
+    this.getMaintenance();
 
   }
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-  
+
     if (!datePattern.test(control.value)) {
       return { invalidDate: true };
     }
@@ -58,19 +54,19 @@ export class ScheduleMaintenanceComponent implements OnInit {
 
     const currentDate = new Date();
     const selectedDate = new Date(control.value);
-    if (selectedDate<currentDate) {
+    if (selectedDate < currentDate) {
       return { invalidDate: true };
     }
     return null;
   }
-  
-  
-    
-  
+
+
+
+
   getHospital() {
-    this.hospitalList=[];
+    this.hospitalList = [];
     this.httpService.getHospital().subscribe((data: any) => {
-      this.hospitalList=data;
+      this.hospitalList = data;
       console.log(this.hospitalList);
     }, error => {
       this.showError = true;
@@ -79,18 +75,17 @@ export class ScheduleMaintenanceComponent implements OnInit {
     });;
   }
 
-  onSubmit()
-  {
-    if(this.itemForm.valid)
-    {
+  onSubmit() {
+    if (this.itemForm.valid) {
       if (this.itemForm.valid) {
         this.showError = false;
-      
-        this.httpService.scheduleMaintenance(this.itemForm.value,this.itemForm.value.equipmentId).subscribe((data: any) => {
+
+        this.httpService.scheduleMaintenance(this.itemForm.value, this.itemForm.value.equipmentId).subscribe((data: any) => {
           this.itemForm.reset();
-          this.showMessage=true;
-          this.responseMessage='Save Successfully';
-          
+          this.showMessage = true;
+          this.responseMessage = 'Save Successfully';
+          this.getMaintenance();
+
         }, error => {
           this.showError = true;
           this.errorMessage = "An error occurred while logging in. Please try again later.";
@@ -100,31 +95,42 @@ export class ScheduleMaintenanceComponent implements OnInit {
         this.itemForm.markAllAsTouched();
       }
     }
-    else{
+    else {
       this.itemForm.markAllAsTouched();
     }
+   
   }
+
+  showSatus() {
+    if (this.isClick == false) {
+      this.isClick = true;
+    }
+    else {
+      this.isClick = false;
+    }
+  }
+
   onHospitalSelect($event: any) {
-   let id= $event.target.value
-   this.equipmentList=[];
-   this.httpService.getEquipmentById(id).subscribe((data: any) => {
-     this.equipmentList=data;
-     console.log(this.equipmentList);
-   }, error => {
-     // Handle error
-     this.showError = true;
-     this.errorMessage = "An error occurred while logging in. Please try again later.";
-     console.error('Login error:', error);
-   });
-  
-}
-ShowError:any=false;
-  maintenanceList: any=[];   
+    let id = $event.target.value
+    this.equipmentList = [];
+    this.httpService.getEquipmentById(id).subscribe((data: any) => {
+      this.equipmentList = data;
+      console.log(this.equipmentList);
+    }, error => {
+      // Handle error
+      this.showError = true;
+      this.errorMessage = "An error occurred while logging in. Please try again later.";
+      console.error('Login error:', error);
+    });
+
+  }
+  ShowError: any = false;
+  maintenanceList: any = [];
   getMaintenance() {
-    this.maintenanceList=[];
+    this.maintenanceList = [];
     this.httpService.getMaintenance().subscribe((data: any) => {
-      this.maintenanceList=data;
-     console.log(data)
+      this.maintenanceList = data;
+      console.log(data)
     }, error => {
       // Handle error
       this.ShowError = true;
@@ -134,12 +140,12 @@ ShowError:any=false;
   }
   getStatusStyle(status: string) {
     if (status === 'Completed') {
-      return {'color': 'green', 'font-weight': 'bold'};
+      return { 'color': 'green', 'font-weight': 'bold' };
     } else if (status === 'In-Process') {
-      return {'color': '#FFC300 ', 'font-weight': 'bold'};
+      return { 'color': '#FFC300 ', 'font-weight': 'bold' };
     } else {
-      return {'color':'#3371FF','font-weight':'bold'}; // or any default style you want
+      return { 'color': '#3371FF', 'font-weight': 'bold' }; // or any default style you want
     }
-  } 
+  }
 
 }

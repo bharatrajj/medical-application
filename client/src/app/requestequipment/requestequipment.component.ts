@@ -12,7 +12,6 @@ import { AuthService } from '../../services/auth.service';
 export class RequestequipmentComponent implements OnInit {
 
   itemForm: FormGroup;
-
   formModel: any = { status: null };
   showError: boolean = false;
   errorMessage: any;
@@ -22,10 +21,8 @@ export class RequestequipmentComponent implements OnInit {
   showMessage: any;
   responseMessage: any;
   equipmentList: any = [];
+  isClick: boolean = false;
   constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
-    if(authService.getRole != 'Hospital'){
-      this.router.navigateByUrl('dashboard');
-    }
     this.itemForm = this.formBuilder.group({
       orderDate: [this.formModel.scheduledDate, [Validators.required, this.dateValidator]],
       quantity: [this.formModel.description, [Validators.required]],
@@ -113,13 +110,28 @@ export class RequestequipmentComponent implements OnInit {
       console.error('Login error:', error);
     });;
   }
+
+  showStatus() {
+    if (this.isClick == false) {
+      this.isClick = true;
+      // this.router.navigate(['/requestequipment'], { fragment: 'div2' });
+    }
+    else {
+      this.isClick = false;
+      // this.router.navigate(['/requestequipment']);
+    }
+
+  }
+
+
+
   getStatusStyle(status: string) {
     if (status === 'Delivered') {
-      return { 'color': 'green', 'font-weight': 'bold', 'font-size':'20px' };
+      return { 'color': 'green', 'font-weight': 'bold', 'font-size': '20px' };
     } else if (status === 'In Transit') {
-      return { 'color': '#FFC300 ', 'font-weight': 'bold', 'font-size':'20px' };
+      return { 'color': '#FFC300 ', 'font-weight': 'bold', 'font-size': '20px' };
     } else {
-      return { 'color': '#3371FF', 'font-weight': 'bold','font-size':'20px' };
+      return { 'color': '#3371FF', 'font-weight': 'bold', 'font-size': '20px' };
     }
   }
 }
