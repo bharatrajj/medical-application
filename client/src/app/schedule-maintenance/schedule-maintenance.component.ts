@@ -139,12 +139,12 @@ export class ScheduleMaintenanceComponent implements OnInit {
     });;
   }
   getStatusStyle(status: string) {
-    if (status === 'Completed') {
-      return { 'color': 'green', 'font-weight': 'bold' };
-    } else if (status === 'In-Process') {
-      return { 'color': '#FFC300 ', 'font-weight': 'bold' };
+    if (status === 'Serviced') {
+      return { 'color': 'green', 'font-weight': 'bold', 'font-size':'20px' };
+    } else if (status === 'In Progress') {
+      return { 'color': '#FFC300 ', 'font-weight': 'bold', 'font-size':'20px' };
     } else {
-      return { 'color': '#3371FF', 'font-weight': 'bold' }; // or any default style you want
+      return { 'color': '#3371FF', 'font-weight': 'bold', 'font-size':'20px' }; // or any default style you want
     }
   }
 

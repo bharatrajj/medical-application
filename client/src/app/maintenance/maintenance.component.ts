@@ -23,7 +23,7 @@ export class MaintenanceComponent implements OnInit {
   maintenanceObj: any={};
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
     {
-      if(authService.getRole != 'Hospital' && authService.getRole != 'Technician'){
+      if(authService.getRole != 'HOSPITAL' && authService.getRole != 'TECHNICIAN'){
         this.router.navigateByUrl('dashboard');
       }
       this.itemForm = this.formBuilder.group({
