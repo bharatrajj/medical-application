@@ -6,6 +6,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+      <li *ngIf="!IsLoggin" >
+        <a class="nav-link" [routerLink]="['/team']">About us</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/createhospital']">Create Hospital</a>
       </li>
@@ -17,10 +20,6 @@
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/requestequipment']">Request Equipment</a>
  
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/team']">About Us</a>
-      </li> -->
-     
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'TECHNICIAN'" [routerLink]="['/maintenance']">Maintenance Report</a>
       </li>
@@ -28,17 +27,15 @@
         <a class="nav-link" *ngIf="roleName === 'SUPPLIER'" [routerLink]="['/orders']">Order Requests</a>
       </li>
     </ul>
-    <ul class="navbar-nav">
-      <li *ngIf="!IsLoggin" >
-        <a class="nav-link" [routerLink]="['/team']">About us</a>
+    <ul class="navbar-nav ms-auto">
+     
+      <li *ngIf="!IsLoggin" class="nav-item">
+        <a class="nav-link" class="btn btn-primary mx-1" [routerLink]="['/login']">Login</a>
       </li>
-      <li *ngIf="!IsLoggin" class="nav-items">
-        <a class="nav-link" class="btn btn-primary" [routerLink]="['/login']">Login</a>
+      <li *ngIf="!IsLoggin" class="nav-item">
+        <a class="nav-link" class="btn btn-primary mx-2" [routerLink]="['/registration']">Register</a>
       </li>
-      <li *ngIf="!IsLoggin" class="nav-itemx">
-        <a class="nav-link" class="btn btn-primary" [routerLink]="['/registration']">Register</a>
-      </li>
-      <li *ngIf="IsLoggin" class="nav-itemy">
+      <li *ngIf="IsLoggin" class="nav-item me-2">
         <a class="nav-link" class="btn btn-danger" (click)="logout()" [routerLink]="['/homepage']">Logout</a>
       </li> 
     </ul>

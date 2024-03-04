@@ -21,7 +21,7 @@ export class RegistrationComponent {
       //complete this function
       username: [this.formModel.username, Validators.required],
       password: [this.formModel.password, Validators.required],
-      email: [this.formModel.email, Validators.required],
+      email: [this.formModel.email, [Validators.required,Validators.email]],
       role: [this.formModel.role, Validators.required]
  
     });
