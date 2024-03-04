@@ -115,6 +115,7 @@ export class RequestequipmentComponent implements OnInit {
   }
 
   showStatus() {
+    this.showMessage=false;
     if (this.isClick == false) {
       this.isClick = true;
       // this.router.navigate(['/requestequipment'], { fragment: 'div2' });

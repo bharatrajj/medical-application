@@ -51,7 +51,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="driverModalLabel">Update Maintenance</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-sm btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="update()">
@@ -78,7 +78,7 @@
                     <div class="mb-3">
                         <label for="status" class="form-label ">Status</label>
                         <select class="form-control" name="status" id="status" formControlName="status" placeholder="Choose Status">
-                            <option value="null">Choose Option</option>
+                            <option value="" placeholder="Choose option">Choose Option</option>
                             <option value="In Progress">In Progress</option>
                             <option value="Serviced">Serviced</option>
                         </select>
@@ -89,7 +89,7 @@
                     <div class="col-md-2">
                         <div class="d-grid">
                             <br>
-                            <button class="btn btn-outline-dark mt-1" type="submit">Submit</button>
+                            <button class="btn btn-outline-dark mt-1" type="submit" [disabled]="itemForm.invalid">Submit</button>
                         </div>
                     </div>
                 </form>

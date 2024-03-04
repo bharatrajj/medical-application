@@ -31,11 +31,6 @@ export class CreatehospitalComponent implements OnInit {
   search: Hospital[]=[];
   NotFoundMessage:string=""
   
-
-
-   /*---------------------------------------------------------------------------------------------------------------------------------*/
-  
-
   constructor(
     public router: Router,
     public httpService: HttpService,
@@ -65,29 +60,15 @@ export class CreatehospitalComponent implements OnInit {
   }
 
 
-   /*---------------------------------------------------------------------------------------------------------------------------------*/
-  
-
-
-
   ngOnInit(): void {
     this.getHospital();
   }
-
-
-
- /*---------------------------------------------------------------------------------------------------------------------------------*/
   
-
-
-
   getHospital() {
     this.httpService.getHospital().subscribe(
       (data: any) => {
         this.hospitalList = data;
         this.search=data;
-        // console.log(this.hospitalList);
-        console.log(this.search)
       },
       error => {
         this.showError = true;
@@ -97,9 +78,6 @@ export class CreatehospitalComponent implements OnInit {
     );
   }
 
-
-
- /*---------------------------------------------------------------------------------------------------------------------------------*/
   
 
 /*(hosp: Search) => hosp.name.toLowerCase().includes(searchTerm) */
@@ -131,8 +109,6 @@ export class CreatehospitalComponent implements OnInit {
     }
   }
   
-
-  /*---------------------------------------------------------------------------------------------------------------------------------*/
    
   
   
@@ -143,7 +119,6 @@ export class CreatehospitalComponent implements OnInit {
     this.modalSearchQuery=""
   }
 
-/*-----------------------------------------------------------------------------------------------*/
   clearMessages() {
     this.showMessage = false;
     this.showError = false;
@@ -151,7 +126,6 @@ export class CreatehospitalComponent implements OnInit {
 
 
 
-/*-----------------------------------------------------------------------------------------------*/
 
 
 
@@ -160,8 +134,6 @@ export class CreatehospitalComponent implements OnInit {
     this.formSubscription.unsubscribe();
   }
 
-
-  /*---------------------------------------------------------------------------------------------------------------------------------*/
   
   
     onSubmit() {
@@ -207,6 +179,7 @@ export class CreatehospitalComponent implements OnInit {
 
   Addequipment(value: any) {
     this.equipmentForm.controls['hospitalId'].setValue(value.id);
+    this.showMessage = false;
   }
 
 
@@ -217,11 +190,12 @@ export class CreatehospitalComponent implements OnInit {
 
   submitEquipment() {
     if (this.equipmentForm.valid) {
-      this.showMessage = false;
+      
       this.httpService.addEquipment(this.equipmentForm.value, this.equipmentForm.controls['hospitalId'].value).subscribe(
         (data: any) => {
           this.showMessage = true;
           this.responseMessage = `Equipment added successfully`;
+          this.equipmentForm.reset();
         },
         error => {
           this.showError = true;

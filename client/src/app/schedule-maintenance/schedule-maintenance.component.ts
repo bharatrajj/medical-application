@@ -102,6 +102,7 @@ export class ScheduleMaintenanceComponent implements OnInit {
   }
 
   showSatus() {
+    this.showMessage=false;
     if (this.isClick == false) {
       this.isClick = true;
     }
@@ -115,7 +116,6 @@ export class ScheduleMaintenanceComponent implements OnInit {
     this.equipmentList = [];
     this.httpService.getEquipmentById(id).subscribe((data: any) => {
       this.equipmentList = data;
-      console.log(this.equipmentList);
     }, error => {
       // Handle error
       this.showError = true;
