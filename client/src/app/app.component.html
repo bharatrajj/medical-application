@@ -5,6 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+
     <ul class="navbar-nav">
       <!-- <li *ngIf="!IsLoggin" >
         <a class="nav-link" [routerLink]="['/team']">About us</a>
@@ -34,7 +35,9 @@
       <li *ngIf="!IsLoggin" >
         <a class="nav-link" [routerLink]="['/team']">Meet The Partners</a>
       </li>
-      <li *ngIf="!IsLoggin" class="nav-items">
+      </ul>
+      <ul class="navbar-nav ms-auto ">
+      <li *ngIf="!IsLoggin" class="nav-items ">
         <a class="nav-link" class="btn btn-primary" [routerLink]="['/login']">Login</a>
       </li>
       <li *ngIf="!IsLoggin" class="nav-item">
