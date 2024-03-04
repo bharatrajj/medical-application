@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { HttpService } from '../../services/http.service';
-import { Search } from '../model/Service';
+import { Hospital } from '../model/Service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-createhospital',
@@ -11,7 +13,7 @@ import { Search } from '../model/Service';
   styleUrls: ['./createhospital.component.scss']
 })
 export class CreatehospitalComponent implements OnInit {
-  isdubclicked: boolean = true;
+  private formSubscription: Subscription;
   itemForm: FormGroup;
   equipmentForm: FormGroup;
   formModel: any = { status: null };
@@ -26,17 +28,27 @@ export class CreatehospitalComponent implements OnInit {
   showHospitalfilterData: boolean = false;//FOR SHOWING THE FILTERED DATA
   showHospitalData: boolean = true;//TO SHOW ALL THE HOSPITALS
   isClick: boolean = true;
-  seach: Search[] = [];
-  NotFoundMessage: string = ""
+  search: Hospital[]=[];
+  NotFoundMessage:string=""
+  
+
+
+   /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+
   constructor(
     public router: Router,
     public httpService: HttpService,
     private formBuilder: FormBuilder,
     private authService: AuthService
   ) {
+    
     if (authService.getRole != 'HOSPITAL') {
       this.router.navigateByUrl('dashboard')
     }
+   
+
+
     this.itemForm = this.formBuilder.group({
       name: [this.formModel.name, [Validators.required]],
       location: [this.formModel.location, [Validators.required]],
@@ -47,18 +59,35 @@ export class CreatehospitalComponent implements OnInit {
       description: [this.formModel.description, [Validators.required]],
       hospitalId: [this.formModel.hospitalId, [Validators.required]],
     });
+    this.formSubscription = this.itemForm.valueChanges.subscribe(() => {
+      this.clearMessages(); // Call method to clear messages
+    });
   }
+
+
+   /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+
+
 
   ngOnInit(): void {
     this.getHospital();
   }
 
+
+
+ /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+
+
+
   getHospital() {
     this.httpService.getHospital().subscribe(
       (data: any) => {
         this.hospitalList = data;
-        this.seach = data;
-        console.log(this.seach)
+        this.search=data;
+        // console.log(this.hospitalList);
+        console.log(this.search)
       },
       error => {
         this.showError = true;
@@ -68,20 +97,26 @@ export class CreatehospitalComponent implements OnInit {
     );
   }
 
-  /*(hosp: Search) => hosp.name.toLowerCase().includes(searchTerm) */
+
+
+ /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+
+/*(hosp: Search) => hosp.name.toLowerCase().includes(searchTerm) */
 
   //SEACHING HOSPITAL BY IT'S NAME
   filterHospitalByName() {
     this.showHospitalfilterData = true; // TO SHOW THE FILTERED HOSPITAL-LIST
     this.showHospitalData = false; // TO DISABLE ALL THE HOSPITAL LIST
-
-    if (!!this.modalSearchQuery) { // Double bang operator is used to check whether the value is there or not
-      const searchTerm = this.modalSearchQuery.toLowerCase(); // Convert search query to lowercase
-      this.filteredHospitalList = this.hospitalList.filter((hosp: Search) => hosp.name.toLowerCase() === searchTerm || hosp.location.toLowerCase() === searchTerm || hosp.id == searchTerm);
-      console.log(this.filteredHospitalList);
+    
+    if (!!this.modalSearchQuery) { // Double bang operator is used to check whether the value is there or not 
+      const searchTerm = this.modalSearchQuery.toLowerCase().trim(); // Convert search query to lowercase and the trim it
+      this.filteredHospitalList = this.hospitalList.filter((hosp: Hospital) => hosp.name.toLowerCase().trim() === searchTerm || hosp.location.toLowerCase().trim() === searchTerm || hosp.id == searchTerm);
+      console.log(this.filteredHospitalList); 
       if (this.filteredHospitalList.length == 0) {
         this.isClick = false;
-        this.NotFoundMessage = "No Data Found!!"
+        this.NotFoundMessage="No Hospital(s) Found!!"
+        this.showHospitalData=true;
 
       } else {
         this.isClick = true;
@@ -89,38 +124,96 @@ export class CreatehospitalComponent implements OnInit {
     } else {
       this.isClick = false; // IF THE SEARCH FIELD DOES NOT HAVE ANY VALUE
       //this.filteredHospitalList = null;
-      this.NotFoundMessage = "No Data Found!!"
+      this.NotFoundMessage="Nothing to search"
+      this.showHospitalData=true;
 
     }
   }
-  //CLOSING THE LIST OF FILTERED SEARCHED HOSPITAL-lISTto search)
+  
+
+  /*---------------------------------------------------------------------------------------------------------------------------------*/
+   
+  
+  
+  //CLOSING THE LIST OF FILTERED SEARCHED HOSPITAL-lIST-->(to search)
   closeIt() {
     this.showHospitalfilterData = false;
     this.showHospitalData = true;
-    this.modalSearchQuery = ""
+    this.modalSearchQuery=""
   }
 
-  onSubmit() {
+/*-----------------------------------------------------------------------------------------------*/
+  clearMessages() {
+    this.showMessage = false;
+    this.showError = false;
+  }
+
+
+
+/*-----------------------------------------------------------------------------------------------*/
+
+
+
+  ngOnDestroy(): void {
+    // Unsubscribe from form value changes to avoid memory leaks
+    this.formSubscription.unsubscribe();
+  }
+
+
+  /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+  
+    onSubmit() {
     if (this.itemForm.valid) {
-      this.httpService.createHospital(this.itemForm.value).subscribe(
-        (data: any) => {
-          this.itemForm.reset();
-          this.getHospital();
-        },
-        error => {
-          this.showError = true;
-          this.errorMessage = "An error occurred while creating hospital. Please try again later.";
-          console.error('Error creating hospital:', error);
-        }
-      );
+      const newHospitalName = this.itemForm.value.name.toLowerCase().trim();
+      const newHospitalLocation = this.itemForm.value.location.toLowerCase().trim();
+  
+      // Check if the new hospital name or location already exists
+      const isDuplicate = this.hospitalList.some((hospital:Hospital) => {
+        return hospital.name.toLowerCase().trim() === newHospitalName && hospital.location.toLowerCase().trim() === newHospitalLocation;
+      });
+  
+      if (isDuplicate) {
+        // Show error message for duplicate hospital
+        this.showError = true;
+        this.errorMessage = "This hospital already exists.";
+        this.showMessage=false;
+      } else {
+        // If not a duplicate, proceed to add the hospital
+        this.httpService.createHospital(this.itemForm.value).subscribe(
+          (data: any) => {
+            this.itemForm.reset();
+            this.getHospital();
+            this.showMessage = true;
+            this.responseMessage = `Hospital added successfully`;
+            this.showError=false;
+          },
+          error => {
+            this.showError = true;
+            this.errorMessage = "An error occurred while creating hospital. Please try again later.";
+            console.error('Error creating hospital:', error);
+          }
+        );
+      }
     } else {
       this.itemForm.markAllAsTouched();
     }
   }
 
+
+   /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+
   Addequipment(value: any) {
     this.equipmentForm.controls['hospitalId'].setValue(value.id);
   }
+
+
+
+
+   /*---------------------------------------------------------------------------------------------------------------------------------*/
+  
+
   submitEquipment() {
     if (this.equipmentForm.valid) {
       this.showMessage = false;
@@ -139,5 +232,6 @@ export class CreatehospitalComponent implements OnInit {
       this.equipmentForm.markAllAsTouched();
     }
   }
+ 
+  
 }
-
