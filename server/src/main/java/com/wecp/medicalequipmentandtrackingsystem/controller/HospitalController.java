@@ -44,13 +44,15 @@ public class HospitalController {
         List<Hospital> hospitals = hospitalService.getAllHospitals();
         return new ResponseEntity<>(hospitals, HttpStatus.OK);
     }
- 
+
+    //assigns equipment to the hosp
     @PostMapping("/api/hospital/equipment")
     public ResponseEntity<Equipment> addEquipment(@RequestParam Long hospitalId, @RequestBody Equipment equipment) {
         Equipment addedEquipment = equipmentService.addEquipment(hospitalId, equipment);
         return new ResponseEntity<>(addedEquipment, HttpStatus.CREATED);
     }
- 
+    
+    //gets all equipments of particular hosp
     @GetMapping("/api/hospital/equipment/{hospitalId}")
     public ResponseEntity<List<Equipment>> getAllEquipmentsOfHospital(@PathVariable Long hospitalId) throws SQLException {
         List<Equipment> equipments = equipmentService.getAllEquipmentOfHospital(hospitalId);

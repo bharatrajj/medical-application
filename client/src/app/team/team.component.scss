@@ -27,7 +27,7 @@ html {
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 teal;
 }
 h2{
   text-align: center;
@@ -122,7 +122,7 @@ padding: 20px;
 
 /* Style the back side */
 .flip-card-back {
-  background-color:black;
+  background-color:rgb(2, 15, 83);
   color: white;
   transform: rotateY(180deg);
   border-radius: 20px;

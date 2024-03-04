@@ -15,7 +15,17 @@ button {
     -webkit-animation: pulse 2s infinite;
     animation: pulse512 1.5s infinite;
    }
-   
+   h2{
+    padding: 10px; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+   }
+   #headerr{
+    color:teal;
+   }
+   .card-header fw-bold{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgba(60, 176, 225, 0.915);
+   }
    @keyframes pulse512 {
     0% {
      box-shadow: 0 0 0 0 #05bada66;

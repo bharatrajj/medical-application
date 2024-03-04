@@ -117,6 +117,7 @@ export class CreatehospitalComponent implements OnInit {
         this.isClick = false;
         this.NotFoundMessage="No Hospital(s) Found!!"
         this.showHospitalData=true;
+        this.NotFoundMessage = "No Hospital Found!!"
 
       } else {
         this.isClick = true;
