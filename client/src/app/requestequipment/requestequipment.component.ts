@@ -22,6 +22,7 @@ export class RequestequipmentComponent implements OnInit {
   responseMessage: any;
   equipmentList: any = [];
   isClick: boolean = false;
+  //creates a form group with following fields
   constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
     this.itemForm = this.formBuilder.group({
       orderDate: [this.formModel.scheduledDate, [Validators.required, this.dateValidator]],
@@ -43,10 +44,11 @@ export class RequestequipmentComponent implements OnInit {
     }, error => {
       // Handle error
       this.showError = true;
-      this.errorMessage = "An error occurred while logging in. Please try again later.";
+      this.errorMessage = "An error occurred. Please try again later.";
       console.error('Login error:', error);
     });;
   }
+  //checks if date is in right pattern and selectedDate should be previous to today
   dateValidator(control: AbstractControl): ValidationErrors | null {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     const selectedDate = new Date(control.value)
@@ -62,17 +64,19 @@ export class RequestequipmentComponent implements OnInit {
     if (this.itemForm.valid) {
       if (this.itemForm.valid) {
         this.showError = false;
-
+        //order equipment will take all the form value and only the value of eq id from the form
         this.httpService.orderEquipment(this.itemForm.value, this.itemForm.value.equipmentId).subscribe((data: any) => {
+          //resets the form once the order is placed
           this.itemForm.reset();
           this.showMessage = true;
-          this.responseMessage = 'Save Successfully';
+          //displays msg on clicking submit btn
+          this.responseMessage = 'Ordered Successfully';
+          //will display the orders
           this.getOrders();
         }, error => {
           // Handle error
           this.showError = true;
-          this.errorMessage = "An error occurred while logging in. Please try again later.";
-          console.error('Login error:', error);
+          this.errorMessage = "An error occurred while requesting. Please try again later.";
         });;
       } else {
         this.itemForm.markAllAsTouched();
@@ -92,8 +96,7 @@ export class RequestequipmentComponent implements OnInit {
     }, error => {
       // Handle error
       this.showError = true;
-      this.errorMessage = "An error occurred while logging in. Please try again later.";
-      console.error('Login error:', error);
+      this.errorMessage = "An error occurred. Please try again later.";
     });;
 
   }

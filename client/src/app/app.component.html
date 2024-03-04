@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-2">
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#"><b>MediService</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,10 @@
     </ul>
     <ul class="navbar-nav">
       <li *ngIf="!IsLoggin" >
-        <a class="nav-link" [routerLink]="['/team']">About us</a>
+        <a class="nav-link" [routerLink]="['/meet-team']">About Us</a>
+      </li>
+      <li *ngIf="!IsLoggin" >
+        <a class="nav-link" [routerLink]="['/team']">Meet The Partners</a>
       </li>
       <li *ngIf="!IsLoggin" class="nav-items">
         <a class="nav-link" class="btn btn-primary" [routerLink]="['/login']">Login</a>

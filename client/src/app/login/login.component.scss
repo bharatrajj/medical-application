@@ -1,3 +1,4 @@
+
 a{
     cursor: pointer;
 }
@@ -21,6 +22,7 @@ a{
   
   .container {
     max-width: 960px;
+    max-height: fit-content;
   }
   
   /* Card styles */
@@ -95,10 +97,13 @@ a{
   }
 
 
-  .background-radial-gradient {
-    background-color: hsl(240, 33%, 1%);
-  }
+  // .background-radial-gradient {
+  //   background-color:
+  // }
   .bg-glass {
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
+  }
+  h1,h3{
+    color: teal;
   }

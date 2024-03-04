@@ -81,7 +81,7 @@ export class CreatehospitalComponent implements OnInit {
       console.log(this.filteredHospitalList);
       if (this.filteredHospitalList.length == 0) {
         this.isClick = false;
-        this.NotFoundMessage = "No Data Found!!"
+        this.NotFoundMessage = "No Hospital Found!!"
 
       } else {
         this.isClick = true;
@@ -89,7 +89,7 @@ export class CreatehospitalComponent implements OnInit {
     } else {
       this.isClick = false; // IF THE SEARCH FIELD DOES NOT HAVE ANY VALUE
       //this.filteredHospitalList = null;
-      this.NotFoundMessage = "No Data Found!!"
+      this.NotFoundMessage = "No Hospital Found!!"
 
     }
   }

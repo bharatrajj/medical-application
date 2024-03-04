@@ -16,6 +16,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { TeamComponent } from './team/team.component';
 // import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { MeetTeamComponent } from './meet-team/meet-team.component';
 
 const routes: Routes = [
   { path:'homepage',component:HomepageComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'maintenance', component: MaintenanceComponent },  
   { path: 'orders', component: OrdersComponent },
   { path: 'team', component: TeamComponent },
+  {path:'meet-team',component:MeetTeamComponent},
   // {path:'status-techinican',component:StatusTechinicanComponent} , 
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'team', component: TeamComponent },  

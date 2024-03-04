@@ -1,20 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;500;700;800;900;1000&display=swap");
-
+h1{
+  color: teal; 
+  padding-top: 10px;
+}
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: "Nunito", sans-serif;
+    overflow: hidden;
+    
   }
   
   body{
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(158, 216, 253);
     padding: 0px 50px;
+
+    
   }
   
  .container{
     padding: 50px 0px;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     gap: 50px;
     justify-content: center;
@@ -41,23 +48,23 @@
   
   .card:hover{
     background-position: 80% 20%;
-    transform: rotate3d(0.5, 1, 0, 30deg);
+    transform: rotate3d(0.5, 1, 0, 45deg);
   }
   
   .content-box{
     height: 100%;
     width: 100%;
-    background-color: rgb(0, 0, 0);
+    background-color: beige;
     
     border-radius: 0px 0px 10px 10px;
-    box-shadow: rgba(0, 115, 255, 0.925) 0px 20px 50px -25px;
+    box-shadow: rgba(197, 214, 235, 0.925) 0px 20px 50px -25px;
     transition: all 0.5s ease-in-out;
     padding: 50px 25px 25px 25px;
     transform-style: preserve-3d;
   }
   
   .card-title{
-    color: white;
+    color: rgb(8, 0, 0);
     font-size: 25px;
     font-weight: 900;
     transition: all 0.5s ease-in-out;
@@ -71,7 +78,7 @@
   .card-content{
     padding-top: 15px;
     font-size: 12px;
-    color: rgb(185, 185, 185);
+    color: rgb(17, 8, 69);
     transition: all 0.5s ease-in-out;
     transform: translate3d(0px, 0px, 20px);
   }
@@ -83,12 +90,12 @@
   .see-more{
     display: block;
     font-weight: 900;
-    font-size: 11px;
+    font-size: 20px;
     text-transform: uppercase;
-    color: rgb(0, 136, 255);
+    color: rgb(124, 165, 42);
     padding-top: 15px;
     transition: all 0.5s ease-in-out;
-    transform: translate3d(0px, 0px, 20px);
+    transform:translate3d(0px, 0px, 20px) ;
   }
   
   .see-more:hover{
@@ -104,7 +111,7 @@
     background-color: black;
     border-radius: 10px;
     padding: 12px;
-    box-shadow: rgb(0, 102, 255) 0px 20px 60px 0px, rgb(0, 200, 255) 0px 18px 36px -18px;
+    box-shadow: bisque;
     transform: translate3d(0px, 0px, 50px);
   }
   
@@ -122,7 +129,7 @@
   .date-box .date{
     font-size: 10px;
     font-weight: 900;
-    color: rgb(0, 136, 255);
+    color: rgb(135, 149, 160);
   }
 
   .card2{

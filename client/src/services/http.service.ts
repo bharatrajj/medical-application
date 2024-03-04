@@ -73,12 +73,8 @@ export class HttpService {
     // headers = headers.set('Authorization', `Bearer ${authToken}`)
     return this.http.get(this.serverName+`/api/hospitals`,this.getRequestOptions());
   }
+  //get particular equiment by its id
   getEquipmentById(id:any):Observable<any> {
-   
-    // const authToken = this.authService.getToken();
-    // let headers = new HttpHeaders();
-    // headers = headers.set('Content-Type', 'application/json');
-    // headers = headers.set('Authorization', `Bearer ${authToken}`)
     return this.http.get(this.serverName+`/api/hospital/equipment/`+id,this.getRequestOptions());
   }
  
