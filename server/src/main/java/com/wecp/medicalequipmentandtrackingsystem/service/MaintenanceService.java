@@ -24,7 +24,7 @@ public class MaintenanceService {
     public List<Maintenance> getAllMaintenance() {
         return maintenanceRepository.findAll();
     }
- 
+    //scheduling the maintenance using the Id of the Equipment
     public Maintenance scheduleMaintenance(Long equipmentId, Maintenance maintenance) {
         Equipment equipment = equipmentRepository.findById(equipmentId)
                 .orElseThrow(() -> new EntityNotFoundException("Equipment not found with ID: " + equipmentId));
@@ -35,7 +35,7 @@ public class MaintenanceService {
         return maintenanceRepository.save(maintenance);
     }
  
- 
+   //Updating the maintenance using the id 
     public Maintenance updateMaintenance(Long maintenanceId, Maintenance updatedMaintenance) {
         // Check if the maintenance record with the given ID exists
         Maintenance existingMaintenance = maintenanceRepository.findById(maintenanceId)
