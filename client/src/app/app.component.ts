@@ -5,26 +5,20 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  IsLoggin:any=false;
+  IsLoggin: any = false;
   roleName: string | null;
-  constructor(private authService: AuthService, private router:Router)
-  {
-   
-    this.IsLoggin=authService.getLoginStatus;
-    this.roleName=authService.getRole;
-    if(this.IsLoggin==false)
-    {
-      this.router.navigateByUrl('/homepage'); 
-    
+  constructor(private authService: AuthService, private router: Router) {
+    this.IsLoggin = authService.getLoginStatus;
+    this.roleName = authService.getRole;
+    if (this.IsLoggin == false) {
+      this.router.navigateByUrl('/homepage');
     }
   }
-  logout()
-{
-  this.authService.logout();
-  window.location.reload();
-}
-
+  logout() {
+    this.authService.logout();
+    window.location.reload();
+  }
 }

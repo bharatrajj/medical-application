@@ -7,13 +7,10 @@ import { LoginComponent } from './login/login.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../services/http.service';
 import { DashbaordComponent } from './dashbaord/dashbaord.component';
-
-
 
 import { CreatehospitalComponent } from './createhospital/createhospital.component';
 import { ScheduleMaintenanceComponent } from './schedule-maintenance/schedule-maintenance.component';
@@ -21,7 +18,6 @@ import { RequestequipmentComponent } from './requestequipment/requestequipment.c
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TeamComponent } from './team/team.component';
-// import { StatusTechinicanComponent } from './status-techinican/status-techinican.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MeetTeamComponent } from './meet-team/meet-team.component';
 
@@ -29,26 +25,25 @@ import { MeetTeamComponent } from './meet-team/meet-team.component';
   declarations: [
     AppComponent,
     LoginComponent,
-      RegistrationComponent,
-      DashbaordComponent,
-      HomepageComponent,
-      CreatehospitalComponent,
-      ScheduleMaintenanceComponent,
-      RequestequipmentComponent,
-      MaintenanceComponent,
-      OrdersComponent,
-      TeamComponent,
-      MeetTeamComponent,
-      // StatusTechinicanComponent
+    RegistrationComponent,
+    DashbaordComponent,
+    HomepageComponent,
+    CreatehospitalComponent,
+    ScheduleMaintenanceComponent,
+    RequestequipmentComponent,
+    MaintenanceComponent,
+    OrdersComponent,
+    TeamComponent,
+    MeetTeamComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule,
   ],
-  providers: [HttpService,HttpClientModule ],
-  bootstrap: [AppComponent]
+  providers: [HttpService, HttpClientModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

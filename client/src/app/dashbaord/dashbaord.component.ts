@@ -4,15 +4,12 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-dashbaord',
   templateUrl: './dashbaord.component.html',
-  styleUrls: ['./dashbaord.component.scss']
+  styleUrls: ['./dashbaord.component.scss'],
 })
-export class DashbaordComponent implements OnInit{
-  roleType:any;
-   constructor(private authService:AuthService){
-
-   }
+export class DashbaordComponent implements OnInit {
+  roleType: any;
+  constructor(private authService: AuthService) {}
   ngOnInit(): void {
-       this.roleType=this.authService.getRole;
-       
+    this.roleType = this.authService.getRole;  // to get the role of the user
   }
 }

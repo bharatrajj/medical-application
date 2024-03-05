@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private token: string | null = null;
   private isLoggedIn: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   // Method to save token received from login
   saveToken(token: string) {
@@ -25,9 +24,7 @@ export class AuthService {
   }
   // Method to retrieve login status
   get getLoginStatus(): boolean {
-
     return !!localStorage.getItem('token');
-
   }
   getToken(): string | null {
     this.token = localStorage.getItem('token');
@@ -37,6 +34,6 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.token = null;
-    this.isLoggedIn = false
+    this.isLoggedIn = false;
   }
 }

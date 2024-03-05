@@ -1,79 +1,79 @@
 .navbar {
   display: flex;
-  background-color:white;
+  background-color: white;
 }
- 
-a, button {
+
+a,
+button {
   font-size: 20px;
   padding-left: 30px;
   padding-right: 30px;
 }
- 
+
 a {
   text-decoration: none;
-  color:black;
+  color: black;
 }
- 
+
 a:hover {
-  background-color: #00268A;
+  background-color: #00268a;
   color: white;
   border-radius: 10px;
 }
- 
+
 .btn {
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 10px;
-  background-color:green;
+  background-color: green;
   color: white;
   border: none;
-  
 }
- 
+
 .logo {
   padding-top: 20px;
   padding-left: 50px;
 }
- 
+
 .right {
   position: absolute;
   top: 30px;
   right: 200px;
-  
 }
- 
+
 .main {
-  display:flex;
+  display: flex;
   // background-image: url('../../assets/3.jpg');
   //background-color:rgb(198, 225, 255);
   width: auto;
   background-repeat: no-repeat;
-  
 }
- 
+
 .img {
-  position:relative;
-  
+  position: relative;
+
   top: 30px;
   background-repeat: no-repeat;
 }
- 
+
 .quote {
   font-size: 60px;
 }
- 
-h1,h2,p {
+
+h1,
+h2,
+p {
   font-size: 30px;
-  color:rgb(13, 109, 59);
+  color: rgb(13, 109, 59);
 }
- 
+
 .text {
   position: relative;
   left: 50px;
-  color:white;
+  color: white;
 }
-h3{
-  color:white;
+h3 {
+  color: white;
 }
 footer {
   position: fixed;
@@ -82,5 +82,3 @@ footer {
   width: 100%;
   text-align: center;
 }
-
- 

@@ -1,18 +1,15 @@
-
-  <html>
-<div class="row text-center">
- <div *ngIf="roleType=='HOSPITAL'">
-    <body>
+<html>
+  <div class="row text-center">
+    <div *ngIf="roleType == 'HOSPITAL'">
+      <body>
         <h1>Welcome Admin</h1>
         <div class="container">
-    
           <div class="parent">
             <div class="card">
               <div class="content-box">
                 <h1 class="card-title">Create New Hospital</h1>
                 <p class="card-content">
-                  Let's build a better world together.
-                  Let's add a new hospital
+                  Let's build a better world together. Let's add a new hospital
                 </p>
                 <a class="see-more" routerLink="/createhospital">See More</a>
               </div>
@@ -22,14 +19,13 @@
               </div>
             </div>
           </div>
-    
+
           <div class="parent card2">
             <div class="card">
               <div class="content-box">
                 <h1 class="card-title">Request Equipment</h1>
                 <p class="card-content">
                   Buckle Up! We are growing so lets get some new equipments!
-                  
                 </p>
                 <a class="see-more" routerLink="/requestequipment">See More</a>
               </div>
@@ -39,7 +35,7 @@
               </div>
             </div>
           </div>
-    
+
           <div class="parent card3">
             <div class="card">
               <div class="content-box">
@@ -47,7 +43,9 @@
                 <p class="card-content">
                   Fix the Disfunctioning Equipment by Scheduling its Maintenace
                 </p>
-                <a class="see-more" routerLink="/schedule-maintenance">See More</a>
+                <a class="see-more" routerLink="/schedule-maintenance"
+                  >See More</a
+                >
               </div>
               <div class="date-box">
                 <span class="month">Medi</span>
@@ -55,51 +53,41 @@
               </div>
             </div>
           </div>
-    
         </div>
       </body>
- </div> 
+    </div>
 
- <div *ngIf="roleType=='SUPPLIER'">
-    
-  <body>
-    <h1>Welcome Supplier</h1>
-    <div class="container">
-      <div class="parent card2">
-        <div class="card">
-          <div class="content-box">
-            <h1 class="card-title">Order Report</h1>
-            <p class="card-content">
-              Generate Order Report
-            </p>
-            <a class="see-more" routerLink="/orders">See More</a>
-          </div>
-          <div class="date-box">
-            <span class="month">Medi</span>
-            <span class="date">Service</span>
+    <div *ngIf="roleType == 'SUPPLIER'">
+      <body>
+        <h1>Welcome Supplier</h1>
+        <div class="container">
+          <div class="parent card2">
+            <div class="card">
+              <div class="content-box">
+                <h1 class="card-title">Order Report</h1>
+                <p class="card-content">Generate Order Report</p>
+                <a class="see-more" routerLink="/orders">See More</a>
+              </div>
+              <div class="date-box">
+                <span class="month">Medi</span>
+                <span class="date">Service</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
+      </body>
     </div>
-  </body>
-
-</div>
-
-</div>
-<!-- if the role is technician -->
-<div *ngIf="roleType=='TECHNICIAN'">
-    
-    <body style="background-color: black;">
+  </div>
+  <!-- if the role is technician -->
+  <div *ngIf="roleType == 'TECHNICIAN'">
+    <body style="background-color: black">
       <h1>Welcome Technician</h1>
       <div class="container">
         <div class="parent card2">
           <div class="card">
             <div class="content-box">
               <h1 class="card-title">Maintenance Report</h1>
-              <p class="card-content">
-                Generate Maintenance Report
-              </p>
+              <p class="card-content">Generate Maintenance Report</p>
               <a class="see-more" routerLink="/maintenance">See More</a>
             </div>
             <div class="date-box">
@@ -108,11 +96,7 @@
             </div>
           </div>
         </div>
-  
       </div>
     </body>
-
-</div>
-
-
+  </div>
 </html>
