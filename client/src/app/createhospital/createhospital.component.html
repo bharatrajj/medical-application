@@ -1,19 +1,21 @@
 <div class="modal-body">
   <div class="input-group mb-3">
+    <!-- Search -->
     <input
       type="text"
       class="form-control search-input"
       placeholder="Search Hospital Name or Location or hospitalId"
       [(ngModel)]="modalSearchQuery"
       id="search-input"
+      (keyup.enter)="filterHospital()"
     />
     <button
       class="btn btn-primary"
       type="button"
       (click)="filterHospital()"
-    >
-      Search
-    </button>
+    >Search</button>
+      <!-- Search -->
+  <!-- </input> -->
     <br />
     <button class="btn btn-secondary" type="button" (click)="closeIt()">
       Clear
@@ -23,10 +25,10 @@
   <div class="table-responsive" *ngIf="showHospitalfilterData">
     <table class="table table-bordered">
       <thead class="bg-dark text-white">
-        <div *ngIf="isClick !== true" id="errorSeach">
+        <div *ngIf="isClick !== true" id="errorSeach" class="alert-danger" style="background-color:lightblue;">
           {{ NotFoundMessage }}
         </div>
-        <div *ngIf="isClick == true" id="errorSeach" class="text-success fw-bold">
+        <div *ngIf="isClick == true" id="errorSeach" class="text-success fw-bold" style="background-color:aquamarine;">
           {{ FoundMessage }}
         </div>
         <tr *ngIf="isClick === true">

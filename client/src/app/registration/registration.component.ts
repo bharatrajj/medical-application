@@ -17,7 +17,7 @@ export class RegistrationComponent {
   2) At least one uppercase alphabet i.e. [A-Z]\n
   3) At least one Numeric digit i.e. [0-9]\n
   4) At least one special character i.e. ['@', '$', '.', '#', '!', '%', '*', '?', '&', '^']\n
-  5) The total length must be in the range [5-10]\n`;
+  5) The total length must be minimum of 8 \n`;
  
  
   strengthColors: { [key: string]: string } = {
@@ -62,10 +62,12 @@ export class RegistrationComponent {
         }else{
           if(this.itemForm.get('role')?.value==='HOSPITAL'){
             this.responseMessage ='Welcome '+this.itemForm.get('username')?.value+' to our page!!. You are an Admin now';
+           //alert("Welcome "+this.itemForm.get('username')?.value)
             this.itemForm.reset();
           }
           else{
             this.responseMessage ='Welcome '+this.itemForm.get('username')?.value+' to our page!!. You are an '+this.itemForm.get('role')?.value+' now';
+            //alert("Welcome "+this.itemForm.get('username')?.value)
             this.itemForm.reset();
           }
        
@@ -102,7 +104,7 @@ export class RegistrationComponent {
     if (password === "") {
       this.passwordStrength = '';
       this.passwordMessage = '';
-    } else if (password.length < 5 || password.length > 10) {
+    } else if (password.length < 8) {
       this.passwordStrength = 'Weak'; // Password length out of range
       this.passwordMessage = this.pMessage;
     } else if (this.itemForm.get('password')?.hasError('pattern')) {

@@ -108,6 +108,11 @@ export class CreatehospitalComponent implements OnInit {
     }
   }
 
+
+
+
+  
+
   //CLOSING THE LIST OF FILTERED SEARCHED HOSPITAL-lIST-->(to search)
   closeIt() {
     this.showHospitalfilterData = false;
@@ -115,16 +120,45 @@ export class CreatehospitalComponent implements OnInit {
     this.modalSearchQuery = '';
   }
 
+
+
+
+  //----------------------------------------------------------------------------------------------
+
+
+
+
+
   clearMessages() {
     this.showMessage = false;
     this.showError = false;
   }
+
+
+  
+  
+  
+  //---------------------------------------------------------------------------------------------
+
+
+
+
 
   ngOnDestroy(): void {
     // Unsubscribe from form value changes to avoid memory leaks
     this.formSubscription.unsubscribe();
   }
 
+
+  
+  
+  
+  //------------------------------------------------------------------------------------------------------
+
+  
+  
+  
+  
   onSubmit() {
     if (this.itemForm.valid) {
       const newHospitalName = this.itemForm.value.name.toLowerCase().trim();

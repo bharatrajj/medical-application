@@ -22,6 +22,16 @@ export class AuthService {
   get getRole(): string | null {
     return localStorage.getItem('role');
   }
+
+
+  SetUsername(username : any)
+  {
+    localStorage.setItem('username',username);
+  }
+
+  get getUsername():string | null{
+    return localStorage.getItem('username');
+  }
   // Method to retrieve login status
   get getLoginStatus(): boolean {
     return !!localStorage.getItem('token');
@@ -33,6 +43,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('username');
     this.token = null;
     this.isLoggedIn = false;
   }

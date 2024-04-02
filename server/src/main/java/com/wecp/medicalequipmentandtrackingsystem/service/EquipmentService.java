@@ -25,7 +25,7 @@ public class EquipmentService {
     public Equipment addEquipment(Long hospitalId, Equipment equipment) {
  
         // check if hospital exists if yes then assigns equipment to that hospital else throws excption
-        Hospital hospital=hospitalRepository.findById(hospitalId).orElseThrow(()->new EntityNotFoundException("Hospital with "+hospitalId+" doesnot exists."));
+        Hospital hospital=hospitalRepository.findById(hospitalId).orElseThrow(()->new EntityNotFoundException("Hospital with "+hospitalId+" does not exists."));
         equipment.setHospital(hospital);
         return equipmentRepository.save(equipment);
  

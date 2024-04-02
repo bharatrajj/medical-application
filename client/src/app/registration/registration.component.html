@@ -44,7 +44,7 @@
                   class="ng-dirty"
                 >
                   <span class="text-danger fw-bold"
-                    >Please Enter Username.</span
+                    >*Please Enter Username.</span
                   >
                 </div>
               </div>
@@ -68,13 +68,13 @@
                     *ngIf="itemForm.get('email')?.hasError('required')"
                     class="text-danger fw-bold"
                   >
-                    Please Enter Email Id
+                    *Please Enter Email Id
                   </div>
                   <div
                     *ngIf="itemForm.get('email')?.hasError('pattern')"
                     class="text-danger fw-bold"
                   >
-                    Invalid Email Id
+                    *Invalid Email Id
                   </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@
                   >
                     {{ passwordStrength }}
                   </div>
-                  <div>{{ passwordMessage }}</div>
+                  <div class="text-danger">{{ passwordMessage }}</div>
                   <div
                     *ngIf="
                       itemForm.get('password')?.hasError('required') &&
@@ -108,7 +108,7 @@
                     "
                     class="text-danger fw-bold"
                   >
-                    Password is Required.
+                    *Password is Required.
                   </div>
                 </div>
               </div>
@@ -165,7 +165,7 @@
                   "
                   class="ng-dirty"
                 >
-                  <span class="text-danger fw-bold">Please choose role.</span>
+                  <span class="text-danger fw-bold">*Please choose role.</span>
                 </div>
               </div>
 
@@ -190,12 +190,12 @@
             <!-- On Succesfull/Unsuccesful registration-->
             <div
               *ngIf="showMessage"
-              class="alert alert-success mt-4"
-              role="alert"
+              class="text text-success fw-bold"
+              role="text"
             >
               {{ responseMessage }}
             </div>
-            <div *ngIf="showError" class="alert alert-danger mt-4" role="alert">
+            <div *ngIf="showError" class="text text-success fw-bold" role="text">
               {{ responseMessage }}
             </div>
           </div>
